@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "@liveblocks/react-ui/styles.css";
+@import "@liveblocks/react-lexical/styles.css";
+
 /* ======================== Lexical Editor */
 
 /**

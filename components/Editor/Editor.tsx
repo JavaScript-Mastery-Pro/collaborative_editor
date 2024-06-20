@@ -6,6 +6,11 @@ import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
+import {
+  liveblocksConfig,
+  LiveblocksPlugin,
+  FloatingComposer,
+} from "@liveblocks/react-lexical";
 
 import ExampleTheme from "./ExampleTheme";
 import ToolbarPlugin from "./plugins/ToolbarPlugin";
@@ -15,16 +20,15 @@ function Placeholder() {
 }
 
 export function Editor() {
-  const initialConfig = {
-    namespace: "React.js Demo",
+  const initialConfig = liveblocksConfig({
+    namespace: "Demo",
     nodes: [],
-    // Handling of errors during update
-    onError(error: Error) {
+    onError: (error: unknown) => {
+      console.error(error);
       throw error;
     },
-    // The editor theme
     theme: ExampleTheme,
-  };
+  });
 
   return (
     <LexicalComposer initialConfig={initialConfig}>
@@ -36,6 +40,9 @@ export function Editor() {
             placeholder={<Placeholder />}
             ErrorBoundary={LexicalErrorBoundary}
           />
+          <LiveblocksPlugin>
+            <FloatingComposer />
+          </LiveblocksPlugin>
           <HistoryPlugin />
           <AutoFocusPlugin />
         </div>

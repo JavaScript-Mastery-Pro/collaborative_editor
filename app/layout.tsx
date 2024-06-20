@@ -11,6 +11,8 @@ import "./globals.css";
 
 import { cn } from "@/lib/utils";
 
+import { Providers } from "./Providers";
+
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -35,15 +37,17 @@ export default function RootLayout({
             fontSans.variable
           )}
         >
-          <header>
-            <SignedOut>
-              <SignInButton />
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-          </header>
-          {children}
+          <Providers>
+            <header>
+              <SignedOut>
+                <SignInButton />
+              </SignedOut>
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
+            </header>
+            {children}
+          </Providers>
         </body>
       </html>
     </ClerkProvider>
