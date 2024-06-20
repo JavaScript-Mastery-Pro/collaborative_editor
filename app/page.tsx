@@ -1,6 +1,7 @@
 import { currentUser } from "@clerk/nextjs/server";
 
-import { Editor } from "@/components/Editor/Editor";
+import { CollaborativeApp } from "./CollaborativeApp";
+import { Room } from "./Room";
 
 export default async function Home() {
   const user = await currentUser();
@@ -9,15 +10,16 @@ export default async function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center p-24">
-      <p>Hello {user?.firstName} </p>
-      <div className="flex flex-col gap-2">
-        <p>ID: {user.id}</p>
-        <p>Email: {user.emailAddresses[0].emailAddress}</p>
-        <p>OAuth: {user.emailAddresses[0].linkedTo[0].type}</p>
-        <div className="border">
-          <Editor />
+      <Room>
+        <p>Hello {user?.firstName} </p>
+        <div className="flex flex-col gap-2">
+          <p>ID: {user.id}</p>
+          <p>Email: {user.emailAddresses[0].emailAddress}</p>
+          <p>OAuth: {user.emailAddresses[0].linkedTo[0].type}</p>
         </div>
-      </div>
+
+        <CollaborativeApp />
+      </Room>
     </main>
   );
 }
