@@ -7,34 +7,39 @@ import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 
-const theme = {
-  // Theme styling goes here
-  // ...
-};
+import ExampleTheme from "./ExampleTheme";
+import ToolbarPlugin from "./plugins/ToolbarPlugin";
 
-// Catch any errors that occur during Lexical updates and log them
-// or throw them as needed. If you don't throw them, Lexical will
-// try to recover gracefully without losing user data.
-function onError(error: unknown) {
-  console.error(error);
+function Placeholder() {
+  return <div className="editor-placeholder">Enter some rich text...</div>;
 }
 
 export function Editor() {
   const initialConfig = {
-    namespace: "MyEditor",
-    theme,
-    onError,
+    namespace: "React.js Demo",
+    nodes: [],
+    // Handling of errors during update
+    onError(error: Error) {
+      throw error;
+    },
+    // The editor theme
+    theme: ExampleTheme,
   };
 
   return (
     <LexicalComposer initialConfig={initialConfig}>
-      <RichTextPlugin
-        contentEditable={<ContentEditable />}
-        placeholder={<div>Enter some text...</div>}
-        ErrorBoundary={LexicalErrorBoundary}
-      />
-      <HistoryPlugin />
-      <AutoFocusPlugin />
+      <div className="editor-container">
+        <ToolbarPlugin />
+        <div className="editor-inner">
+          <RichTextPlugin
+            contentEditable={<ContentEditable className="editor-input" />}
+            placeholder={<Placeholder />}
+            ErrorBoundary={LexicalErrorBoundary}
+          />
+          <HistoryPlugin />
+          <AutoFocusPlugin />
+        </div>
+      </div>
     </LexicalComposer>
   );
 }
