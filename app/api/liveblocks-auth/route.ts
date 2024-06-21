@@ -17,6 +17,7 @@ export async function POST(request: Request) {
   const user = {
     id: clerkUser.id,
     info: {
+      clerkId: clerkUser.id,
       name: `${clerkUser.firstName} ${clerkUser.lastName}`,
       email: clerkUser.emailAddresses[0].emailAddress,
       avatar: clerkUser.imageUrl,
