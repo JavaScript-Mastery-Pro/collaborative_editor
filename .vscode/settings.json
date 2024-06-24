@@ -8,7 +8,7 @@
   "prettier.tabWidth": 2,
   "prettier.useTabs": false,
   "prettier.semi": true,
-  "prettier.singleQuote": false,
+  "prettier.singleQuote": true,
   "prettier.jsxSingleQuote": false,
   "prettier.trailingComma": "es5",
   "prettier.arrowParens": "always",

@@ -1,12 +1,20 @@
-"use client";
+'use client';
 
-import { RoomProvider, ClientSideSuspense } from "@liveblocks/react/suspense";
-import { ReactNode } from "react";
+import { RoomProvider, ClientSideSuspense } from '@liveblocks/react/suspense';
+import { ReactNode } from 'react';
 
-export function Room({ children }: { children: ReactNode }) {
+export function Room({
+  roomId,
+  children,
+}: {
+  roomId: string;
+  children: ReactNode;
+}) {
   return (
-    <RoomProvider id="my-room">
-      <ClientSideSuspense fallback={<div>Loading…</div>}>
+    <RoomProvider id={roomId}>
+      <ClientSideSuspense
+        fallback={<div className="flex h-screen items-center">Loading…</div>}
+      >
         {children}
       </ClientSideSuspense>
     </RoomProvider>
