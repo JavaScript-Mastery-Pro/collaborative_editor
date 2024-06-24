@@ -7,7 +7,7 @@ import { createDocument } from '@/lib/actions/room.actions';
 
 import { Button } from './ui/button';
 
-export const DocumentForm = ({
+export const CreateDocument = ({
   userId,
   email,
 }: {
@@ -28,11 +28,10 @@ export const DocumentForm = ({
       console.log('Error notif:', error);
     }
   };
+
   return (
-    <div>
-      <Button type="submit" onClick={createDocumentHandler}>
-        Create New
-      </Button>
-    </div>
+    <Button type="submit" onClick={createDocumentHandler}>
+      Create New
+    </Button>
   );
 };

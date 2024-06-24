@@ -30,8 +30,6 @@ export function CollaborativeApp({
 
   const users = [self, ...others.map((other) => other.info)];
 
-  const userCount = others.length;
-
   const deleteDocumentHandler = async () => {
     try {
       await deleteDocument(roomId);
@@ -107,7 +105,7 @@ export function CollaborativeApp({
 
         <Editor />
 
-        <p>There are {userCount + 1} user(s) online.</p>
+        <p>There are {others.length + 1} user(s) online.</p>
       </div>
     </div>
   );

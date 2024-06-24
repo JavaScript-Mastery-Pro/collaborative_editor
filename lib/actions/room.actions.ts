@@ -65,18 +65,6 @@ export const getDocuments = async (userId: string) => {
   }
 };
 
-// Delete one document
-export const deleteDocument = async (roomId: string) => {
-  try {
-    liveblocks.deleteRoom(roomId);
-  } catch (error) {
-    console.error('An error occurred while deleting a room:', error);
-  } finally {
-    revalidatePath('/documents');
-    redirect('/documents');
-  }
-};
-
 // Update document title
 export const updateDocument = async (roomId: string, title: string) => {
   try {
@@ -93,6 +81,18 @@ export const updateDocument = async (roomId: string, title: string) => {
       'An error occurred while updating the document title:',
       error
     );
+  }
+};
+
+// Delete one document
+export const deleteDocument = async (roomId: string) => {
+  try {
+    liveblocks.deleteRoom(roomId);
+  } catch (error) {
+    console.error('An error occurred while deleting a room:', error);
+  } finally {
+    revalidatePath('/documents');
+    redirect('/documents');
   }
 };
 
@@ -124,6 +124,6 @@ export const shareDocumentAccess = async ({
 
     return parseStringify(rooms);
   } catch (error) {
-    console.error('An error occurred while updating a room:', error);
+    console.error('An error occurred while sharing the document:', error);
   }
 };

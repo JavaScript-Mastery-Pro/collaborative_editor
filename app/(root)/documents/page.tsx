@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation';
 
 import { getDocuments } from '@/lib/actions/room.actions';
 
-import { DocumentForm } from '@/components/DocumentForm';
+import { CreateDocument } from '@/components/CreateDocument';
 
 const Documents = async () => {
   const clerkUser = await currentUser();
@@ -16,7 +16,7 @@ const Documents = async () => {
   return (
     <div className="flex w-full flex-col items-center justify-center">
       <div className="flex w-full items-center justify-between border p-5">
-        <DocumentForm
+        <CreateDocument
           userId={clerkUser.id}
           email={clerkUser.emailAddresses[0].emailAddress}
         />
