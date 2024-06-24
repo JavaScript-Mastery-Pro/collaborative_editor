@@ -54,7 +54,7 @@ export const getDocument = async (roomId: string) => {
   }
 };
 
-// Get multiple documents
+// Get multiple documents filtered by users accesses
 export const getDocuments = async (userId: string) => {
   try {
     const rooms = await liveblocks.getRooms({ userId });
