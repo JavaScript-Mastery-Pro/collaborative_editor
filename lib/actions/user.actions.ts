@@ -4,12 +4,12 @@ import { createClerkClient } from '@clerk/clerk-sdk-node';
 
 import { parseStringify } from '../utils';
 
+const clerkClient = createClerkClient({
+  secretKey: process.env.CLERK_SECRET_KEY as string,
+});
+
 export const getClerkUsers = async (userIds?: string[]) => {
   try {
-    const clerkClient = createClerkClient({
-      secretKey: process.env.CLERK_SECRET_KEY as string,
-    });
-
     const query = userIds
       ? {
           emailAddress: userIds,
