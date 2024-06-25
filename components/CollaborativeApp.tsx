@@ -10,6 +10,7 @@ import { deleteDocument, updateDocument } from '@/lib/actions/room.actions';
 
 import { Editor } from '@/components/Editor/Editor';
 
+import { Comments } from './Comments';
 import { ShareDocument } from './ShareDocument';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
@@ -28,10 +29,7 @@ export function CollaborativeApp({
   const others = useOthers();
 
   const [documentTitle, setDocumentTitle] = useState(roomMetadata.title);
-
   const users = [self, ...others.map((other) => other.info)];
-
-  console.log({ users });
 
   const deleteDocumentHandler = async () => {
     try {
@@ -91,25 +89,30 @@ export function CollaborativeApp({
           })}
         </div>
       </div>
-      <div className="flex w-fit flex-col p-10">
-        <div className="w-[382px] gap-4 rounded-lg bg-white p-3">
-          <p className="border-b text-[18px]">User Info</p>
-          <p className="mb-2 border-b py-1">Room Id: {roomId}</p>
-          <div className="flex gap-2">
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-            <p>{self.name}</p>
+      <div className="flex gap-10 p-10">
+        <div className="flex w-fit flex-col ">
+          <div className="w-[382px] gap-4 rounded-lg bg-white p-3">
+            <p className="border-b text-[18px]">User Info</p>
+            <p className="mb-2 border-b py-1">Room Id: {roomId}</p>
+            <div className="flex gap-2">
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
+              <p>{self.name}</p>
+            </div>
+            <p>{self.id}</p>
+            <div className="flex flex-col gap-2">
+              <p>{self.email}</p>
+            </div>
           </div>
-          <p>{self.id}</p>
-          <div className="flex flex-col gap-2">
-            <p>{self.email}</p>
-          </div>
+
+          <Editor />
+          <p>There are {others.length + 1} user(s) online.</p>
         </div>
 
-        <Editor />
-
-        <p>There are {others.length + 1} user(s) online.</p>
+        <div className="flex-1">
+          <Comments />
+        </div>
       </div>
     </div>
   );

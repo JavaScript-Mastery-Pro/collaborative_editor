@@ -27,3 +27,10 @@ declare type ShareDocumentParams = {
   email: string;
   userType: UserType;
 };
+
+declare type User = {
+  id: string;
+  name: string;
+  email: string;
+  avatar: string;
+};

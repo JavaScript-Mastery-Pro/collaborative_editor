@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
-import { LexicalComposer } from "@lexical/react/LexicalComposer";
-import { ContentEditable } from "@lexical/react/LexicalContentEditable";
-import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
-import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
-import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
+import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin';
+import { LexicalComposer } from '@lexical/react/LexicalComposer';
+import { ContentEditable } from '@lexical/react/LexicalContentEditable';
+import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';
+import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
+import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import {
   liveblocksConfig,
   LiveblocksPlugin,
   FloatingComposer,
-} from "@liveblocks/react-lexical";
+} from '@liveblocks/react-lexical';
 
-import ExampleTheme from "./ExampleTheme";
-import ToolbarPlugin from "./plugins/ToolbarPlugin";
+import ExampleTheme from './ExampleTheme';
+import ToolbarPlugin from './plugins/ToolbarPlugin';
 
 function Placeholder() {
   return <div className="editor-placeholder">Enter some rich text...</div>;
@@ -21,7 +21,7 @@ function Placeholder() {
 
 export function Editor() {
   const initialConfig = liveblocksConfig({
-    namespace: "Demo",
+    namespace: 'Demo',
     nodes: [],
     onError: (error: unknown) => {
       console.error(error);
