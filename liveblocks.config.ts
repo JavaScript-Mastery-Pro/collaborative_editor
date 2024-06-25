@@ -19,7 +19,7 @@ declare global {
     UserMeta: {
       id: string;
       info: {
-        clerkId: string;
+        id: string;
         name: string;
         email: string;
         avatar: string;

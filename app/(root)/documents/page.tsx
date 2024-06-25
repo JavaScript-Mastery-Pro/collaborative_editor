@@ -1,5 +1,6 @@
 import { SignedIn, UserButton } from '@clerk/nextjs';
 import { currentUser } from '@clerk/nextjs/server';
+import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
@@ -11,7 +12,9 @@ const Documents = async () => {
   const clerkUser = await currentUser();
   if (!clerkUser) redirect('/sign-in');
 
-  const roomDocuments = await getDocuments(clerkUser.id);
+  const roomDocuments = await getDocuments(
+    clerkUser.emailAddresses[0].emailAddress
+  );
 
   return (
     <div className="flex w-full flex-col items-center justify-center">
@@ -20,7 +23,6 @@ const Documents = async () => {
           userId={clerkUser.id}
           email={clerkUser.emailAddresses[0].emailAddress}
         />
-
         <SignedIn>
           <UserButton />
         </SignedIn>
@@ -28,12 +30,21 @@ const Documents = async () => {
       <ul className="flex w-full flex-col rounded-lg  p-5">
         {roomDocuments.data.map((document: any) => {
           return (
-            <Link key={document.id} href={`/documents/${document.id}`}>
-              <p className="border-b border-gray-300/50 py-3">
-                {' '}
-                <span className="font-bold">
-                  {document.metadata.title}{' '}
-                </span> | {document.id}
+            <Link
+              key={document.id}
+              href={`/documents/${document.id}`}
+              className="flex items-center gap-3 border-b px-2"
+            >
+              <Image
+                src="/assets/icons/file.svg"
+                alt="file"
+                width={32}
+                height={32}
+                className="rounded-md bg-gray-300/50 p-1"
+              />
+              <p className=" border-gray-300/50 py-3">
+                <span className="font-bold">{document.metadata.title} </span> |{' '}
+                {document.id}
               </p>
             </Link>
           );

@@ -10,6 +10,7 @@ import { deleteDocument, updateDocument } from '@/lib/actions/room.actions';
 
 import { Editor } from '@/components/Editor/Editor';
 
+import { ShareDocument } from './ShareDocument';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 
@@ -29,6 +30,8 @@ export function CollaborativeApp({
   const [documentTitle, setDocumentTitle] = useState(roomMetadata.title);
 
   const users = [self, ...others.map((other) => other.info)];
+
+  console.log({ users });
 
   const deleteDocumentHandler = async () => {
     try {
@@ -59,10 +62,11 @@ export function CollaborativeApp({
           <Button variant="secondary" onClick={() => router.push('/documents')}>
             Back
           </Button>
-
           <Button variant="destructive" onClick={deleteDocumentHandler}>
             Delete
           </Button>
+
+          <ShareDocument roomId={roomId} />
         </div>
         <Input
           type="email"
@@ -76,7 +80,7 @@ export function CollaborativeApp({
           {users.map((user) => {
             return (
               <Image
-                key={user.clerkId}
+                key={user.id}
                 src={user.avatar}
                 alt={user.name}
                 width={100}
@@ -97,7 +101,7 @@ export function CollaborativeApp({
             </SignedIn>
             <p>{self.name}</p>
           </div>
-          <p>{self.clerkId}</p>
+          <p>{self.id}</p>
           <div className="flex flex-col gap-2">
             <p>{self.email}</p>
           </div>

@@ -5,7 +5,7 @@ import { nanoid } from 'nanoid';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
-import { parseStringify } from '../utils';
+import { getAccessType, parseStringify } from '../utils';
 
 const liveblocks = new Liveblocks({
   secret: process.env.LIVEBLOCKS_SECRET_KEY as string,
@@ -20,14 +20,13 @@ export const createDocument = async ({
 
   try {
     const metadata = {
-      userId,
+      creatorId: userId,
       email,
-      userType: 'creator',
       title: 'Untitled',
     };
 
     const usersAccesses: RoomAccesses = {
-      [userId]: ['room:write'],
+      [email]: ['room:write'],
     };
 
     const room = await liveblocks.createRoom(roomId, {
@@ -55,9 +54,9 @@ export const getDocument = async (roomId: string) => {
 };
 
 // Get multiple documents filtered by users accesses
-export const getDocuments = async (userId: string) => {
+export const getDocuments = async (email: string) => {
   try {
-    const rooms = await liveblocks.getRooms({ userId });
+    const rooms = await liveblocks.getRooms({ userId: email });
 
     return parseStringify(rooms);
   } catch (error) {
@@ -99,26 +98,15 @@ export const deleteDocument = async (roomId: string) => {
 // Share document access - Edit (['room:write']) or Read (['room:read', 'room:presence:write'])
 export const shareDocumentAccess = async ({
   roomId,
-  userId,
   email,
-  title,
   userType,
-  accessType,
-}: UpdateDocumentParams) => {
+}: ShareDocumentParams) => {
   try {
-    const metadata = {
-      userId,
-      email,
-      title,
-      userType,
-      accessType,
+    const usersAccesses: RoomAccesses = {
+      [email]: getAccessType(userType) as AccessType,
     };
 
-    const usersAccesses: RoomAccesses = {
-      [email]: accessType,
-    };
     const rooms = await liveblocks.updateRoom(roomId, {
-      metadata,
       usersAccesses,
     });
 
