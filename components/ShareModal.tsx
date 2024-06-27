@@ -29,10 +29,10 @@ export const ShareModal = ({
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const users = Object.entries(usersAccesses).map(([email, access]) => ({
-    email,
-    access,
-  }));
+  // const users = Object.entries(usersAccesses).map(([email, access]) => ({
+  //   email,
+  //   access,
+  // }));
 
   const shareDocumentHandler = async () => {
     setLoading(true);
@@ -78,14 +78,14 @@ export const ShareModal = ({
           className="focus-visible:ring-0 focus-visible:ring-offset-0"
           onChange={(e) => setEmail(e.target.value)}
         />
-
+        {/* 
         <ul className="flex flex-col">
           {users.map((user, i) => (
             <li key={user.email + i} className="border-b px-2 py-4 ">
               <p className="text-sm text-[#444]">{user.email}</p>
             </li>
           ))}
-        </ul>
+        </ul> */}
 
         <DialogFooter className="mt-2 flex gap-2">
           <Button
