@@ -14,7 +14,7 @@ import {
 
 import FloatingToolbarPlugin from './plugins/FloatingToolbarPlugin';
 import ToolbarPlugin from './plugins/ToolbarPlugin';
-// import Theme from './Theme';
+import Theme from './Theme';
 import { Comments } from '../Comments';
 import { DeleteModal } from '../DeleteModal';
 
@@ -30,7 +30,7 @@ export function Editor({ roomId }: { roomId: string }) {
       console.error(error);
       throw error;
     },
-    // theme: Theme,
+    theme: Theme,
   });
 
   return (
