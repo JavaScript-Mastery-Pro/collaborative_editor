@@ -12,6 +12,7 @@ import {
   FloatingComposer,
 } from '@liveblocks/react-lexical';
 
+import FloatingToolbarPlugin from './plugins/FloatingToolbarPlugin';
 import ToolbarPlugin from './plugins/ToolbarPlugin';
 // import Theme from './Theme';
 import { Comments } from '../Comments';
@@ -41,7 +42,7 @@ export function Editor({ roomId }: { roomId: string }) {
         </div>
 
         <div className="custom-height flex flex-col items-center justify-start gap-5 overflow-auto px-5 pb-16 pt-5 lg:flex-row lg:items-start lg:justify-center  xl:gap-10 xl:pb-20 xl:pt-10">
-          <div className="editor-inner h-fit w-full max-w-[800px] border border-gray-300/40  shadow-md">
+          <div className="editor-inner relative h-fit w-full max-w-[800px] border border-gray-300/40  shadow-md">
             <RichTextPlugin
               contentEditable={
                 <ContentEditable className="editor-input h-full" />
@@ -49,15 +50,16 @@ export function Editor({ roomId }: { roomId: string }) {
               placeholder={<Placeholder />}
               ErrorBoundary={LexicalErrorBoundary}
             />
+            <FloatingToolbarPlugin />
 
-            <LiveblocksPlugin>
-              <FloatingComposer />
-            </LiveblocksPlugin>
             <HistoryPlugin />
             <AutoFocusPlugin />
           </div>
 
-          <Comments />
+          <LiveblocksPlugin>
+            <FloatingComposer className="w-[350px]" />
+            <Comments />
+          </LiveblocksPlugin>
         </div>
       </div>
     </LexicalComposer>

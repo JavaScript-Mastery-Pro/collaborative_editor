@@ -1,5 +1,9 @@
+import { BaseMetadata, ThreadData } from '@liveblocks/client';
 import { useThreads } from '@liveblocks/react/suspense';
+import { useIsThreadActive } from '@liveblocks/react-lexical';
 import { Thread, Composer } from '@liveblocks/react-ui';
+
+import { cn } from '@/lib/utils';
 
 export const Comments = () => {
   const { threads } = useThreads();
@@ -9,12 +13,23 @@ export const Comments = () => {
       <Composer className="w-full max-w-[800px] shadow-sm lg:w-[350px]" />
 
       {threads.map((thread) => (
-        <Thread
-          key={thread.id}
-          thread={thread}
-          className="w-full max-w-[800px] shadow-sm lg:w-[350px]"
-        />
+        <ThreadWrapper key={thread.id} thread={thread} />
       ))}
     </div>
+  );
+};
+
+const ThreadWrapper = ({ thread }: { thread: ThreadData<BaseMetadata> }) => {
+  const isActive = useIsThreadActive(thread.id);
+
+  return (
+    <Thread
+      thread={thread}
+      data-state={isActive ? 'active' : null}
+      className={cn(
+        'w-full max-w-[800px] border shadow-sm lg:w-[350px] transition-all',
+        isActive && 'border-[#2196f3]  shadow-md'
+      )}
+    />
   );
 };

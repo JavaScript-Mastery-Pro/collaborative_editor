@@ -108,7 +108,7 @@ function Toolbar({
         minWidth: 'max-content',
       }}
     >
-      <div className="border-border/80 text-foreground bg-card flex w-full min-w-max items-center justify-center gap-2 rounded-lg border p-1.5 shadow">
+      <div className="flex w-full min-w-max items-center justify-center gap-2 rounded-lg border bg-white p-1.5 shadow">
         <button
           onClick={() => {
             const isOpen = editor.dispatchCommand(
@@ -119,7 +119,7 @@ function Toolbar({
               onRangeChange(null);
             }
           }}
-          className="focus-visible:ring-ring hover:bg-accent hover:text-accent-foreground data-[active]:bg-accent relative inline-flex size-8 items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50"
+          className="relative inline-flex size-8 items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50"
         >
           <Image
             src="/assets/icons/comment.svg"

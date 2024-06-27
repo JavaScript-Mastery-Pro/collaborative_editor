@@ -38,7 +38,7 @@ export const DeleteModal = ({ roomId }: { roomId: string }) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>
-        <div className="min-w-9 rounded-lg bg-transparent p-2 transition-all hover:bg-[#eee]">
+        <div className="min-w-9 rounded-xl bg-transparent p-2 transition-all hover:bg-[#eee]">
           <Image
             src="/assets/icons/delete.svg"
             alt="more"
