@@ -82,7 +82,7 @@ const Documents = async () => {
           </ul>
         </div>
       ) : (
-        <div className="flex w-full max-w-[500px] flex-col items-center justify-center gap-3 rounded-lg border bg-[#f8f8f8] px-10 py-8">
+        <div className="flex w-full max-w-[730px] flex-col items-center justify-center gap-3 rounded-lg border bg-[#f8f8f8] px-10 py-8">
           <Image
             src="/assets/icons/doc.svg"
             alt="file"
