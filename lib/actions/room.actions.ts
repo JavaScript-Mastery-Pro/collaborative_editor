@@ -35,7 +35,7 @@ export const createDocument = async ({
       defaultAccesses: [], // [] means private room
     });
 
-    revalidatePath('/documents');
+    revalidatePath('/');
     return parseStringify(room);
   } catch (error) {
     console.error('An error occurred while creating a room:', error);
@@ -90,8 +90,8 @@ export const deleteDocument = async (roomId: string) => {
   } catch (error) {
     console.error('An error occurred while deleting a room:', error);
   } finally {
-    revalidatePath('/documents');
-    redirect('/documents');
+    revalidatePath('/');
+    redirect('/');
   }
 };
 

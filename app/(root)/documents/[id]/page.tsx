@@ -7,9 +7,13 @@ const Document = async ({ params: { id } }: SearchParamProps) => {
   const room = await getDocument(id);
 
   return (
-    <main className="flex min-h-screen flex-col items-center">
+    <main className="flex w-full flex-col items-center">
       <Room roomId={id}>
-        <CollaborativeApp roomId={id} roomMetadata={room.metadata} />
+        <CollaborativeApp
+          roomId={id}
+          roomMetadata={room.metadata}
+          usersAccesses={room.usersAccesses}
+        />
       </Room>
     </main>
   );

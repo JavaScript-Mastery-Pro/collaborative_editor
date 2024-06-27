@@ -1,118 +1,171 @@
 'use client';
 
 import { SignedIn, UserButton } from '@clerk/nextjs';
-import { useOthers, useSelf } from '@liveblocks/react/suspense';
+import { useOthers } from '@liveblocks/react/suspense';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
 
-import { deleteDocument, updateDocument } from '@/lib/actions/room.actions';
+import { updateDocument } from '@/lib/actions/room.actions';
 
 import { Editor } from '@/components/Editor/Editor';
 
-import { Comments } from './Comments';
-import { ShareDocument } from './ShareDocument';
-import { Button } from './ui/button';
+import { ShareModal } from './ShareModal';
 import { Input } from './ui/input';
 
 type CollaborativeAppProps = {
   roomId: string;
   roomMetadata: RoomMetadata;
+  usersAccesses: RoomAccesses;
 };
 
 export function CollaborativeApp({
   roomId,
   roomMetadata,
+  usersAccesses,
 }: CollaborativeAppProps) {
-  const router = useRouter();
-  const self = useSelf((me) => me.info);
   const others = useOthers();
 
   const [documentTitle, setDocumentTitle] = useState(roomMetadata.title);
-  const users = [self, ...others.map((other) => other.info)];
+  const [editing, setEditing] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  const deleteDocumentHandler = async () => {
-    try {
-      await deleteDocument(roomId);
-    } catch (error) {
-      console.log('Error notif:', error);
-    }
-  };
+  const users = others.map((other) => other.info);
 
   const updateTitleHandler = async (
     e: React.KeyboardEvent<HTMLInputElement>
   ) => {
     if (e.key === 'Enter') {
+      setLoading(true);
+
       try {
         if (documentTitle !== roomMetadata.title) {
-          await updateDocument(roomId, documentTitle);
+          const updatedDocument = await updateDocument(roomId, documentTitle);
+
+          if (updatedDocument) {
+            setEditing(false);
+          }
         }
       } catch (error) {
         console.log('Error notif:', error);
       }
+
+      setLoading(false);
     }
   };
 
-  return (
-    <div className="flex size-full flex-1 flex-col items-center border-4">
-      <div className="flex w-full items-center justify-between border p-5">
-        <div className="flex w-80 gap-2">
-          <Button variant="secondary" onClick={() => router.push('/documents')}>
-            Back
-          </Button>
-          <Button variant="destructive" onClick={deleteDocumentHandler}>
-            Delete
-          </Button>
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
+        setEditing(false);
+      }
+    };
 
-          <ShareDocument roomId={roomId} />
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (editing && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [editing]);
+
+  return (
+    <div className="flex size-full max-h-screen flex-1 flex-col items-center overflow-hidden">
+      {/* Header */}
+      {/* <div className="flex w-full justify-center border"> */}
+      <div className="flex h-full min-h-[64px] w-screen min-w-full flex-nowrap items-center justify-between gap-2 overflow-auto border-b px-4">
+        {/* Logo */}
+        <div className="flex gap-2 md:flex-1">
+          <Link href="/" className=" flex items-center gap-1 ">
+            <Image
+              src="/assets/icons/doc.svg"
+              alt="file"
+              width={32}
+              height={32}
+            />
+            <p className="hidden pt-1 text-[20px] font-semibold text-[#2196f3] md:block">
+              Docs
+            </p>
+          </Link>
         </div>
-        <Input
-          type="email"
-          value={documentTitle}
-          placeholder="Enter title"
-          onChange={(e) => setDocumentTitle(e.target.value)}
-          onKeyDown={(e) => updateTitleHandler(e)}
-          className="border-none bg-transparent text-center text-xl font-bold focus-visible:ring-0 focus-visible:ring-offset-0"
-        />
-        <div className="flex w-80 justify-end -space-x-1 overflow-hidden">
-          {users.map((user) => {
-            return (
+
+        {/* Title */}
+        <div
+          ref={containerRef}
+          className="flex w-1/2 items-center justify-center gap-2 sm:w-fit"
+        >
+          {editing && !loading ? (
+            <Input
+              type="email"
+              value={documentTitle}
+              ref={inputRef}
+              placeholder="Enter title"
+              onChange={(e) => setDocumentTitle(e.target.value)}
+              onKeyDown={(e) => updateTitleHandler(e)}
+              disabled={!editing}
+              className="min-w-[78px] border-none bg-transparent text-center text-xl font-semibold text-[#444] focus-visible:ring-0 focus-visible:ring-offset-0 disabled:text-black"
+            />
+          ) : (
+            <>
+              <p className="line-clamp-1 font-semibold leading-[24px] text-[#444] sm:text-xl">
+                {documentTitle}
+              </p>
               <Image
-                key={user.id}
-                src={user.avatar}
-                alt={user.name}
-                width={100}
-                height={100}
-                className="inline-block size-8 rounded-full ring-2 ring-[#eee]"
+                src="/assets/icons/edit.svg"
+                alt="file"
+                width={18}
+                height={18}
+                onClick={() => setEditing(true)}
+                className="cursor-pointer"
               />
-            );
-          })}
+            </>
+          )}
+          {loading && <p className="text-sm text-gray-400">saving...</p>}
+        </div>
+
+        {/* Collaborators & Actions */}
+        <div className="flex w-full flex-1 justify-end gap-2">
+          {users.length > 0 && (
+            <ul className="hidden items-center justify-end -space-x-3 overflow-hidden sm:flex">
+              {users.map((user) => {
+                return (
+                  <li key={user.id}>
+                    <Image
+                      src={user.avatar}
+                      alt={user.name}
+                      width={100}
+                      height={100}
+                      className="inline-block size-8 rounded-full border-2 border-[#2196f3] ring-2 ring-white"
+                    />
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+
+          <ShareModal roomId={roomId} usersAccesses={usersAccesses} />
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
         </div>
       </div>
-      <div className="flex gap-10 p-10">
-        <div className="flex w-fit flex-col ">
-          <div className="w-[382px] gap-4 rounded-lg bg-white p-3">
-            <p className="border-b text-[18px]">User Info</p>
-            <p className="mb-2 border-b py-1">Room Id: {roomId}</p>
-            <div className="flex gap-2">
-              <SignedIn>
-                <UserButton />
-              </SignedIn>
-              <p>{self.name}</p>
-            </div>
-            <p>{self.id}</p>
-            <div className="flex flex-col gap-2">
-              <p>{self.email}</p>
-            </div>
-          </div>
+      {/* </div> */}
 
-          <Editor />
-          <p>There are {others.length + 1} user(s) online.</p>
-        </div>
+      <Editor roomId={roomId} />
 
-        <div className="flex-1">
-          <Comments />
-        </div>
+      <div className="fixed bottom-0 left-0 w-full border-t border-gray-300/40 bg-white px-4 py-2">
+        <p className="text-sm text-[#444]">
+          There are {others.length + 1} user(s) online.
+        </p>
       </div>
     </div>
   );

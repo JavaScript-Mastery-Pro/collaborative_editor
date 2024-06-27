@@ -5,14 +5,14 @@ export const Comments = () => {
   const { threads } = useThreads();
 
   return (
-    <div className="space-y-5">
-      <Composer className="w-[300px] rounded-lg" />
+    <div className="flex w-full flex-col items-center justify-center space-y-4 lg:w-fit ">
+      <Composer className="w-full max-w-[800px] shadow-sm lg:w-[350px]" />
 
       {threads.map((thread) => (
         <Thread
           key={thread.id}
           thread={thread}
-          className="w-[300px] !rounded-lg"
+          className="w-full max-w-[800px] shadow-sm lg:w-[350px]"
         />
       ))}
     </div>

@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
@@ -30,8 +31,13 @@ export const CreateDocument = ({
   };
 
   return (
-    <Button type="submit" onClick={createDocumentHandler}>
-      Create New
+    <Button
+      type="submit"
+      className="flex gap-1 bg-[#2196F3] hover:bg-[#1882d8]"
+      onClick={createDocumentHandler}
+    >
+      <Image src="/assets/icons/add.svg" alt="add" width={24} height={24} />
+      Create
     </Button>
   );
 };

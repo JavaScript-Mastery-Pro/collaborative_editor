@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "@liveblocks/react-ui/styles.css";
-@import "@liveblocks/react-lexical/styles.css";
+@import '@liveblocks/react-ui/styles.css';
+@import '@liveblocks/react-lexical/styles.css';
 
 /* ======================== Lexical Editor */
 
@@ -17,18 +17,33 @@
 
 body {
   margin: 0;
-  background: #eee;
+  background: #ffffff;
   font-family:
     system-ui,
     -apple-system,
     BlinkMacSystemFont,
-    ".SFNSText-Regular",
+    '.SFNSText-Regular',
     sans-serif;
   font-weight: 500;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+@layer utilities {
+}
+
+.custom-height {
+  height: calc(100vh - 114px);
+}
+
+/* CLERK STYLES OVERRIDES */
+.cl-avatarBox {
+  width: 36px;
+  height: 36px;
+  border: 2px solid #2196f3;
+}
+
+/* LEXICAL EDITOR STYLES */
 .other h2 {
   font-size: 18px;
   color: #444;
@@ -66,16 +81,16 @@ h1 {
 }
 
 .editor-container {
-  margin: 20px auto 20px auto;
+  /* margin: 20px auto 20px auto; */
   border-radius: 2px;
-  max-width: 600px;
+  /* max-width: 600px; */
   color: #000;
-  position: relative;
+  /* position: relative; */
   line-height: 20px;
   font-weight: 400;
   text-align: left;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  /* border-top-left-radius: 10px;
+  border-top-right-radius: 10px; */
 }
 
 .editor-inner {
@@ -84,14 +99,14 @@ h1 {
 }
 
 .editor-input {
-  min-height: 150px;
+  min-height: 1100px;
   resize: none;
   font-size: 15px;
   caret-color: rgb(5, 5, 5);
   position: relative;
   tab-size: 1;
   outline: 0;
-  padding: 15px 10px;
+  padding: 40px;
   caret-color: #444;
 }
 
@@ -100,8 +115,8 @@ h1 {
   overflow: hidden;
   position: absolute;
   text-overflow: ellipsis;
-  top: 15px;
-  left: 10px;
+  top: 40px;
+  left: 40px;
   font-size: 15px;
   user-select: none;
   display: inline-block;
