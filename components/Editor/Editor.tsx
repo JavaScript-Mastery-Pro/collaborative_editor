@@ -10,7 +10,9 @@ import {
   liveblocksConfig,
   LiveblocksPlugin,
   FloatingComposer,
+  useEditorStatus,
 } from '@liveblocks/react-lexical';
+import Image from 'next/image';
 
 import FloatingToolbarPlugin from './plugins/FloatingToolbarPlugin';
 import ToolbarPlugin from './plugins/ToolbarPlugin';
@@ -22,16 +24,18 @@ function Placeholder() {
   return <div className="editor-placeholder">Start writing here...</div>;
 }
 
+const initialConfig = liveblocksConfig({
+  namespace: 'Demo',
+  nodes: [],
+  onError: (error: unknown) => {
+    console.error(error);
+    throw error;
+  },
+  theme: Theme,
+});
+
 export function Editor({ roomId }: { roomId: string }) {
-  const initialConfig = liveblocksConfig({
-    namespace: 'Demo',
-    nodes: [],
-    onError: (error: unknown) => {
-      console.error(error);
-      throw error;
-    },
-    theme: Theme,
-  });
+  const status = useEditorStatus();
 
   return (
     <LexicalComposer initialConfig={initialConfig}>
@@ -41,21 +45,33 @@ export function Editor({ roomId }: { roomId: string }) {
           <DeleteModal roomId={roomId} />
         </div>
 
-        <div className="custom-height flex flex-col items-center justify-start gap-5 overflow-auto px-5 pb-16 pt-5 lg:flex-row lg:items-start lg:justify-center  xl:gap-10 xl:pb-20 xl:pt-10">
-          <div className="editor-inner relative h-fit w-full max-w-[800px] border border-gray-300/40  shadow-md">
-            <RichTextPlugin
-              contentEditable={
-                <ContentEditable className="editor-input h-full" />
-              }
-              placeholder={<Placeholder />}
-              ErrorBoundary={LexicalErrorBoundary}
-            />
-            <FloatingToolbarPlugin />
+        <div className="flex h-[calc(100vh-114px)] flex-col items-center justify-start gap-5 overflow-auto px-5 pb-16 pt-5 lg:flex-row lg:items-start lg:justify-center  xl:gap-10 xl:pb-20 xl:pt-10">
+          {status === 'not-loaded' || status === 'loading' ? (
+            <div className="flex size-full h-screen items-center justify-center gap-3 text-[#666666]">
+              <Image
+                src="/assets/icons/loader.svg"
+                alt="loader"
+                width={32}
+                height={32}
+                className="animate-spin"
+              />
+              Loading...
+            </div>
+          ) : (
+            <div className="editor-inner relative h-fit w-full max-w-[800px] border border-gray-300/40  shadow-md">
+              <RichTextPlugin
+                contentEditable={
+                  <ContentEditable className="editor-input h-full" />
+                }
+                placeholder={<Placeholder />}
+                ErrorBoundary={LexicalErrorBoundary}
+              />
+              <FloatingToolbarPlugin />
 
-            <HistoryPlugin />
-            <AutoFocusPlugin />
-          </div>
-
+              <HistoryPlugin />
+              <AutoFocusPlugin />
+            </div>
+          )}
           <LiveblocksPlugin>
             <FloatingComposer className="w-[350px]" />
             <Comments />

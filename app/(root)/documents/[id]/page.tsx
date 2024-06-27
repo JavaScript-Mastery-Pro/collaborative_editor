@@ -1,10 +1,26 @@
+import { currentUser } from '@clerk/nextjs/server';
+import { redirect } from 'next/navigation';
+
 import { getDocument } from '@/lib/actions/room.actions';
+import { getClerkUsers } from '@/lib/actions/user.actions';
 
 import { CollaborativeApp } from '@/components/CollaborativeApp';
 import { Room } from '@/components/Room';
 
 const Document = async ({ params: { id } }: SearchParamProps) => {
-  const room = await getDocument(id);
+  const clerkUser = await currentUser();
+  if (!clerkUser) redirect('/sign-in');
+
+  const room = await getDocument({
+    roomId: id,
+    userId: clerkUser.emailAddresses[0].emailAddress,
+  });
+
+  const userIds = Object.keys(room.usersAccesses);
+
+  const users = await getClerkUsers(userIds);
+
+  if (!room) redirect('/');
 
   return (
     <main className="flex w-full flex-col items-center">
@@ -12,7 +28,7 @@ const Document = async ({ params: { id } }: SearchParamProps) => {
         <CollaborativeApp
           roomId={id}
           roomMetadata={room.metadata}
-          usersAccesses={room.usersAccesses}
+          users={users}
         />
       </Room>
     </main>

@@ -1,5 +1,7 @@
 'use server';
 
+import console from 'console';
+
 import { Liveblocks } from '@liveblocks/node';
 import { nanoid } from 'nanoid';
 import { revalidatePath } from 'next/cache';
@@ -43,9 +45,22 @@ export const createDocument = async ({
 };
 
 // Get one document
-export const getDocument = async (roomId: string) => {
+export const getDocument = async ({
+  roomId,
+  userId,
+}: {
+  roomId: string;
+  userId: string;
+}) => {
   try {
     const room = await liveblocks.getRoom(roomId);
+
+    // Check if the user has access to the document's room
+    const hasAccess = Object.keys(room.usersAccesses).includes(userId);
+
+    if (!hasAccess) {
+      throw new Error('You do not have access to this document.');
+    }
 
     return parseStringify(room);
   } catch (error) {
@@ -106,11 +121,42 @@ export const shareDocumentAccess = async ({
       [email]: getAccessType(userType) as AccessType,
     };
 
-    const rooms = await liveblocks.updateRoom(roomId, {
+    const room = await liveblocks.updateRoom(roomId, {
       usersAccesses,
     });
 
-    return parseStringify(rooms);
+    revalidatePath(`/documents/${roomId}`);
+    return parseStringify(room);
+  } catch (error) {
+    console.error('An error occurred while sharing the document:', error);
+  }
+};
+
+export const removeCollaborator = async ({
+  roomId,
+  email,
+}: {
+  roomId: string;
+  email: string;
+}) => {
+  try {
+    const room = await liveblocks.getRoom(roomId);
+
+    if (room.metadata.email === email) {
+      throw new Error(
+        'You cannot remove the creator from the collaborators list.'
+      );
+    }
+
+    const updatedRoom = await liveblocks.updateRoom(roomId, {
+      usersAccesses: { [email]: null },
+    });
+
+    // console.log({ usersAccesses });
+    console.log({ updatedRoom });
+
+    revalidatePath(`/documents/${roomId}`);
+    return parseStringify(updatedRoom);
   } catch (error) {
     console.error('An error occurred while sharing the document:', error);
   }

@@ -3,7 +3,10 @@
 import Image from 'next/image';
 import { useState } from 'react';
 
-import { shareDocumentAccess } from '@/lib/actions/room.actions';
+import {
+  removeCollaborator,
+  shareDocumentAccess,
+} from '@/lib/actions/room.actions';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -18,21 +21,18 @@ import { Input } from '@/components/ui/input';
 
 type ShareDocumentDialogProps = {
   roomId: string;
-  usersAccesses: RoomAccesses;
+  collaborators: User[];
+  creatorId: string;
 };
 
 export const ShareModal = ({
   roomId,
-  usersAccesses,
+  collaborators,
+  creatorId,
 }: ShareDocumentDialogProps) => {
   const [email, setEmail] = useState('');
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  // const users = Object.entries(usersAccesses).map(([email, access]) => ({
-  //   email,
-  //   access,
-  // }));
 
   const shareDocumentHandler = async () => {
     setLoading(true);
@@ -44,7 +44,19 @@ export const ShareModal = ({
         userType: 'editor',
       });
 
-      if (room) setOpen(false);
+      if (room) setEmail('');
+    } catch (error) {
+      console.log('Error notif:', error);
+    }
+
+    setLoading(false);
+  };
+
+  const removeCollaboratorHandler = async (email: string) => {
+    setLoading(true);
+
+    try {
+      await removeCollaborator({ roomId, email });
     } catch (error) {
       console.log('Error notif:', error);
     }
@@ -66,7 +78,7 @@ export const ShareModal = ({
           <p className="mr-1 hidden sm:block">Share</p>
         </Button>
       </DialogTrigger>
-      <DialogContent className="w-full max-w-[400px]">
+      <DialogContent className="w-full max-w-[400px] rounded-xl">
         <DialogHeader>
           <DialogTitle>Invite collaborators</DialogTitle>
         </DialogHeader>
@@ -75,17 +87,58 @@ export const ShareModal = ({
           id="email"
           placeholder="Enter email address"
           value={email}
-          className="focus-visible:ring-0 focus-visible:ring-offset-0"
+          className="mt-4 h-11 border bg-[#f8f8f8] focus-visible:ring-0 focus-visible:ring-offset-0"
           onChange={(e) => setEmail(e.target.value)}
         />
-        {/* 
-        <ul className="flex flex-col">
-          {users.map((user, i) => (
-            <li key={user.email + i} className="border-b px-2 py-4 ">
-              <p className="text-sm text-[#444]">{user.email}</p>
-            </li>
-          ))}
-        </ul> */}
+
+        <div className="my-2 space-y-2">
+          <p className="text-[#444]">Collaborators:</p>
+          <ul className="flex flex-col">
+            {collaborators.map((collaborator, i) => (
+              <li
+                key={collaborator.id}
+                className="flex items-center justify-between gap-2 border-b px-2 py-3 last:border-b"
+              >
+                <div className="flex gap-2">
+                  <Image
+                    src={collaborator.avatar}
+                    alt="avatar"
+                    width={36}
+                    height={36}
+                    className="rounded-full border-2 border-[#2196f3] "
+                  />
+                  <div>
+                    <p className="line-clamp-1 text-sm font-semibold leading-4 text-[#444]">
+                      {collaborator.name}
+                    </p>
+                    <p className="text-sm text-gray-400">
+                      {collaborator.email}
+                    </p>
+                  </div>
+                </div>
+
+                {creatorId === collaborator.id ? (
+                  <p className="text-sm text-gray-400">admin</p>
+                ) : (
+                  <Button
+                    type="button"
+                    onClick={() =>
+                      removeCollaboratorHandler(collaborator.email)
+                    }
+                    className="rounded-lg bg-transparent p-2 hover:bg-transparent"
+                  >
+                    <Image
+                      src="/assets/icons/close.svg"
+                      alt="close"
+                      width={20}
+                      height={20}
+                    />
+                  </Button>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
 
         <DialogFooter className="mt-2 flex gap-2">
           <Button
@@ -98,8 +151,14 @@ export const ShareModal = ({
           <Button
             type="submit"
             onClick={shareDocumentHandler}
-            className="bg-[#2196f3] hover:bg-[#3987cf]"
+            className="flex gap-1 bg-[#2196f3] hover:bg-[#3987cf]"
           >
+            <Image
+              src="/assets/icons/add.svg"
+              alt="add"
+              width={20}
+              height={20}
+            />
             {loading ? 'Sending Invite...' : 'Invite'}
           </Button>
         </DialogFooter>

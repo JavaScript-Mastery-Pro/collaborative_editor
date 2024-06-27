@@ -29,13 +29,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-@layer utilities {
-}
-
-.custom-height {
-  height: calc(100vh - 114px);
-}
-
 /* CLERK STYLES OVERRIDES */
 .cl-avatarBox {
   width: 36px;

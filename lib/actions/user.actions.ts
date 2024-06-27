@@ -8,6 +8,7 @@ const clerkClient = createClerkClient({
   secretKey: process.env.CLERK_SECRET_KEY as string,
 });
 
+// Get Clerk Users
 export const getClerkUsers = async (userIds?: string[]) => {
   try {
     const query = userIds

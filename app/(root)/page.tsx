@@ -20,6 +20,7 @@ const Documents = async () => {
 
   return (
     <main className="flex min-h-screen w-full flex-col items-center gap-5 sm:gap-10">
+      {/* Header */}
       <div className="flex h-[64px] w-full items-center justify-between border-b bg-white px-4">
         <div className=" flex items-center gap-1 ">
           <Image
@@ -36,6 +37,8 @@ const Documents = async () => {
           </SignedIn>
         </div>
       </div>
+
+      {/* Document list */}
       {roomDocuments.data.length > 0 ? (
         <div className="flex w-full flex-col items-center gap-5 px-4">
           <div className="flex w-full max-w-[730px] items-end justify-between">
@@ -82,6 +85,7 @@ const Documents = async () => {
           </ul>
         </div>
       ) : (
+        // Empty state
         <div className="flex w-full max-w-[730px] flex-col items-center justify-center gap-3 rounded-lg border bg-[#f8f8f8] px-10 py-8">
           <Image
             src="/assets/icons/doc.svg"

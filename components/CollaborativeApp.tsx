@@ -16,13 +16,13 @@ import { Input } from './ui/input';
 type CollaborativeAppProps = {
   roomId: string;
   roomMetadata: RoomMetadata;
-  usersAccesses: RoomAccesses;
+  users: User[];
 };
 
 export function CollaborativeApp({
   roomId,
   roomMetadata,
-  usersAccesses,
+  users,
 }: CollaborativeAppProps) {
   const others = useOthers();
 
@@ -32,7 +32,7 @@ export function CollaborativeApp({
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const users = others.map((other) => other.info);
+  const otherUsers = others.map((other) => other.info);
 
   const updateTitleHandler = async (
     e: React.KeyboardEvent<HTMLInputElement>
@@ -133,9 +133,9 @@ export function CollaborativeApp({
 
         {/* Collaborators & Actions */}
         <div className="flex w-full flex-1 justify-end gap-2">
-          {users.length > 0 && (
+          {otherUsers.length > 0 && (
             <ul className="hidden items-center justify-end -space-x-3 overflow-hidden sm:flex">
-              {users.map((user) => {
+              {otherUsers.map((user) => {
                 return (
                   <li key={user.id}>
                     <Image
@@ -151,7 +151,11 @@ export function CollaborativeApp({
             </ul>
           )}
 
-          <ShareModal roomId={roomId} usersAccesses={usersAccesses} />
+          <ShareModal
+            roomId={roomId}
+            collaborators={users}
+            creatorId={roomMetadata.creatorId}
+          />
           <SignedIn>
             <UserButton />
           </SignedIn>

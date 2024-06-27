@@ -48,7 +48,7 @@ export const DeleteModal = ({ roomId }: { roomId: string }) => {
           />
         </div>
       </DialogTrigger>
-      <DialogContent className="w-full max-w-[400px]">
+      <DialogContent className="w-full max-w-[400px] rounded-xl">
         <DialogHeader>
           <DialogTitle>Delete document</DialogTitle>
           <DialogDescription>
