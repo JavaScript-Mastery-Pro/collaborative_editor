@@ -81,7 +81,6 @@ export function CollaborativeApp({
   return (
     <div className="flex size-full max-h-screen flex-1 flex-col items-center overflow-hidden">
       {/* Header */}
-      {/* <div className="flex w-full justify-center border"> */}
       <div className="flex h-full min-h-[64px] w-screen min-w-full flex-nowrap items-center justify-between gap-2 overflow-auto border-b px-4">
         {/* Logo */}
         <div className="flex gap-2 md:flex-1">
@@ -101,7 +100,7 @@ export function CollaborativeApp({
         {/* Title */}
         <div
           ref={containerRef}
-          className="flex w-1/2 items-center justify-center gap-2 sm:w-fit"
+          className="flex w-fit items-center justify-center gap-2"
         >
           {editing && !loading ? (
             <Input
@@ -112,7 +111,7 @@ export function CollaborativeApp({
               onChange={(e) => setDocumentTitle(e.target.value)}
               onKeyDown={(e) => updateTitleHandler(e)}
               disabled={!editing}
-              className="min-w-[78px] border-none bg-transparent text-center text-xl font-semibold text-[#444] focus-visible:ring-0 focus-visible:ring-offset-0 disabled:text-black"
+              className="min-w-[78px] border-none bg-transparent text-left text-xl font-semibold text-[#444] focus-visible:ring-0 focus-visible:ring-offset-0 disabled:text-black sm:text-center"
             />
           ) : (
             <>
@@ -158,7 +157,6 @@ export function CollaborativeApp({
           </SignedIn>
         </div>
       </div>
-      {/* </div> */}
 
       <Editor roomId={roomId} />
 

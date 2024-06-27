@@ -27,6 +27,7 @@ export const ShareModal = ({
 }: ShareDocumentDialogProps) => {
   const [email, setEmail] = useState('');
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const users = Object.entries(usersAccesses).map(([email, access]) => ({
     email,
@@ -34,6 +35,8 @@ export const ShareModal = ({
   }));
 
   const shareDocumentHandler = async () => {
+    setLoading(true);
+
     try {
       const room = await shareDocumentAccess({
         roomId,
@@ -45,6 +48,8 @@ export const ShareModal = ({
     } catch (error) {
       console.log('Error notif:', error);
     }
+
+    setLoading(false);
   };
 
   return (
@@ -95,7 +100,7 @@ export const ShareModal = ({
             onClick={shareDocumentHandler}
             className="bg-[#2196f3] hover:bg-[#3987cf]"
           >
-            Invite
+            {loading ? 'Sending Invite...' : 'Invite'}
           </Button>
         </DialogFooter>
       </DialogContent>
