@@ -12,7 +12,6 @@ import {
   FloatingComposer,
 } from '@liveblocks/react-lexical';
 
-import FloatingToolbarPlugin from './plugins/FloatingToolbarPlugin';
 import ToolbarPlugin from './plugins/ToolbarPlugin';
 // import Theme from './Theme';
 import { Comments } from '../Comments';
@@ -50,7 +49,7 @@ export function Editor({ roomId }: { roomId: string }) {
               placeholder={<Placeholder />}
               ErrorBoundary={LexicalErrorBoundary}
             />
-            <FloatingToolbarPlugin />
+
             <LiveblocksPlugin>
               <FloatingComposer />
             </LiveblocksPlugin>
