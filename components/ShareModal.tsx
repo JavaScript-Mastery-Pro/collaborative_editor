@@ -53,15 +53,11 @@ export const ShareModal = ({
   };
 
   const removeCollaboratorHandler = async (email: string) => {
-    setLoading(true);
-
     try {
       await removeCollaborator({ roomId, email });
     } catch (error) {
       console.log('Error notif:', error);
     }
-
-    setLoading(false);
   };
 
   return (

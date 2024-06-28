@@ -16,11 +16,11 @@ const Document = async ({ params: { id } }: SearchParamProps) => {
     userId: clerkUser.emailAddresses[0].emailAddress,
   });
 
+  if (!room) redirect('/');
+
   const userIds = Object.keys(room.usersAccesses);
 
   const users = await getClerkUsers(userIds);
-
-  if (!room) redirect('/');
 
   return (
     <main className="flex w-full flex-col items-center">
