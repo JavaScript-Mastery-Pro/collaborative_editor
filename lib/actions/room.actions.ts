@@ -152,9 +152,6 @@ export const removeCollaborator = async ({
       usersAccesses: { [email]: null },
     });
 
-    // console.log({ usersAccesses });
-    console.log({ updatedRoom });
-
     revalidatePath(`/documents/${roomId}`);
     return parseStringify(updatedRoom);
   } catch (error) {

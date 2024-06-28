@@ -111,11 +111,11 @@ export function CollaborativeApp({
               onChange={(e) => setDocumentTitle(e.target.value)}
               onKeyDown={(e) => updateTitleHandler(e)}
               disabled={!editing}
-              className="min-w-[78px] border-none bg-transparent text-left text-xl font-semibold text-[#444] focus-visible:ring-0 focus-visible:ring-offset-0 disabled:text-black sm:text-center"
+              className="xs:max-w-full min-w-[78px] max-w-[150px] border-none bg-transparent px-0 text-left text-base font-semibold leading-[24px] text-[#444] focus-visible:ring-0 focus-visible:ring-offset-0 disabled:text-black sm:text-xl md:text-center"
             />
           ) : (
             <>
-              <p className="line-clamp-1 font-semibold leading-[24px] text-[#444] sm:text-xl">
+              <p className="line-clamp-1 text-base font-semibold leading-[24px] text-[#444] sm:text-xl">
                 {documentTitle}
               </p>
               <Image
