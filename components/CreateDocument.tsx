@@ -33,11 +33,11 @@ export const CreateDocument = ({
   return (
     <Button
       type="submit"
-      className="flex gap-1 bg-[#2196F3] hover:bg-[#1882d8]"
+      className="gradient-blue flex gap-1 shadow-md"
       onClick={createDocumentHandler}
     >
       <Image src="/assets/icons/add.svg" alt="add" width={24} height={24} />
-      Create
+      Start a blank document
     </Button>
   );
 };

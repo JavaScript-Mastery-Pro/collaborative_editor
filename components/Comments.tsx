@@ -10,7 +10,7 @@ export const Comments = () => {
 
   return (
     <div className="flex w-full flex-col items-center justify-center space-y-4 lg:w-fit ">
-      <Composer className="w-full max-w-[800px] shadow-sm lg:w-[350px]" />
+      <Composer className="w-full max-w-[800px] bg-dark-200 shadow-sm lg:w-[350px]" />
 
       {threads.map((thread) => (
         <ThreadWrapper key={thread.id} thread={thread} />
@@ -22,13 +22,15 @@ export const Comments = () => {
 const ThreadWrapper = ({ thread }: { thread: ThreadData<BaseMetadata> }) => {
   const isActive = useIsThreadActive(thread.id);
 
+  console.log('isActive', isActive);
+
   return (
     <Thread
       thread={thread}
       data-state={isActive ? 'active' : null}
       className={cn(
-        'w-full max-w-[800px] border shadow-sm lg:w-[350px] transition-all',
-        isActive && 'border-[#2196f3]  shadow-md'
+        'w-full max-w-[800px] border bg-dark-200 shadow-sm lg:w-[350px] transition-all',
+        isActive && 'border-[#2196f3] !bg-red-500 shadow-md',
       )}
     />
   );

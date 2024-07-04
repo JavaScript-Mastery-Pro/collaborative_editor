@@ -25,7 +25,7 @@ function Placeholder() {
 }
 
 const initialConfig = liveblocksConfig({
-  namespace: 'Demo',
+  namespace: 'Editor',
   nodes: [],
   onError: (error: unknown) => {
     console.error(error);
@@ -39,8 +39,8 @@ export function Editor({ roomId }: { roomId: string }) {
 
   return (
     <LexicalComposer initialConfig={initialConfig}>
-      <div className="editor-container size-full bg-[#f8f8f8]">
-        <div className=" z-50 flex w-screen min-w-full justify-between overflow-auto border-b bg-white pl-3 pr-4 shadow-sm">
+      <div className="editor-container size-full ">
+        <div className=" z-50 flex w-screen min-w-full justify-between overflow-auto border-y border-dark-300 bg-dark-100 pl-3 pr-4 shadow-sm">
           <ToolbarPlugin />
           <DeleteModal roomId={roomId} />
         </div>
@@ -58,7 +58,7 @@ export function Editor({ roomId }: { roomId: string }) {
               Loading...
             </div>
           ) : (
-            <div className="editor-inner relative h-fit w-full max-w-[800px] border border-gray-300/40  shadow-md">
+            <div className="editor-inner relative h-fit w-full max-w-[800px]  shadow-md">
               <RichTextPlugin
                 contentEditable={
                   <ContentEditable className="editor-input h-full" />

@@ -26,7 +26,7 @@ export async function POST() {
       userId: user.info.email, // Info stored in liveblock's userAccess
       groupIds: [],
     },
-    { userInfo: user.info }
+    { userInfo: user.info },
   );
 
   return new Response(body, { status });

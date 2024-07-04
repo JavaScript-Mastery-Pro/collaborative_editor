@@ -35,7 +35,7 @@ export function CollaborativeApp({
   const otherUsers = others.map((other) => other.info);
 
   const updateTitleHandler = async (
-    e: React.KeyboardEvent<HTMLInputElement>
+    e: React.KeyboardEvent<HTMLInputElement>,
   ) => {
     if (e.key === 'Enter') {
       setLoading(true);
@@ -81,7 +81,7 @@ export function CollaborativeApp({
   return (
     <div className="flex size-full max-h-screen flex-1 flex-col items-center overflow-hidden">
       {/* Header */}
-      <div className="flex h-full min-h-[64px] w-screen min-w-full flex-nowrap items-center justify-between gap-2 overflow-auto border-b px-4">
+      <div className="flex h-full min-h-[92px] w-screen min-w-full flex-nowrap items-center justify-between gap-2 overflow-auto px-4">
         {/* Logo */}
         <div className="flex gap-2 md:flex-1">
           <Link href="/" className=" flex items-center gap-1 ">
@@ -111,18 +111,18 @@ export function CollaborativeApp({
               onChange={(e) => setDocumentTitle(e.target.value)}
               onKeyDown={(e) => updateTitleHandler(e)}
               disabled={!editing}
-              className="xs:max-w-full min-w-[78px] max-w-[150px] border-none bg-transparent px-0 text-left text-base font-semibold leading-[24px] text-[#444] focus-visible:ring-0 focus-visible:ring-offset-0 disabled:text-black sm:text-xl md:text-center"
+              className="xs:max-w-full min-w-[78px] max-w-[150px] border-none bg-transparent px-0 text-left text-base font-semibold leading-[24px] focus-visible:ring-0 focus-visible:ring-offset-0 disabled:text-black sm:text-xl md:text-center"
             />
           ) : (
             <>
-              <p className="line-clamp-1 text-base font-semibold leading-[24px] text-[#444] sm:text-xl">
+              <p className="line-clamp-1 text-base font-semibold leading-[24px] sm:text-xl">
                 {documentTitle}
               </p>
               <Image
                 src="/assets/icons/edit.svg"
-                alt="file"
-                width={18}
-                height={18}
+                alt="edit"
+                width={20}
+                height={20}
                 onClick={() => setEditing(true)}
                 className="cursor-pointer"
               />
@@ -143,7 +143,7 @@ export function CollaborativeApp({
                       alt={user.name}
                       width={100}
                       height={100}
-                      className="inline-block size-8 rounded-full border-2 border-[#2196f3] ring-2 ring-white"
+                      className="inline-block size-8 rounded-full border-2 border-blue-500 ring-2 ring-dark-100"
                     />
                   </li>
                 );
@@ -164,8 +164,8 @@ export function CollaborativeApp({
 
       <Editor roomId={roomId} />
 
-      <div className="fixed bottom-0 left-0 w-full border-t border-gray-300/40 bg-white px-4 py-2">
-        <p className="text-sm text-[#444]">
+      <div className="fixed bottom-0 left-0 w-full border-t border-dark-300 bg-dark-100 px-4 py-2">
+        <p className="text-sm font-normal text-blue-100/50">
           There are {others.length + 1} user(s) online.
         </p>
       </div>

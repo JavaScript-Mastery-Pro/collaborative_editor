@@ -41,7 +41,7 @@ export default function FloatingToolbar() {
           anchor.getNode(),
           anchor.offset,
           focus.getNode(),
-          focus.offset
+          focus.offset,
         );
 
         setRange(range);
@@ -108,12 +108,12 @@ function Toolbar({
         minWidth: 'max-content',
       }}
     >
-      <div className="flex w-full min-w-max items-center justify-center gap-2 rounded-lg border bg-white p-1.5 shadow">
+      <div className="flex w-full min-w-max items-center justify-center gap-2 rounded-lg bg-dark-350 p-1.5 shadow-xl">
         <button
           onClick={() => {
             const isOpen = editor.dispatchCommand(
               OPEN_FLOATING_COMPOSER_COMMAND,
-              undefined
+              undefined,
             );
             if (isOpen) {
               onRangeChange(null);
@@ -130,7 +130,7 @@ function Toolbar({
         </button>
       </div>
     </div>,
-    container
+    container,
   );
 }
 
@@ -195,7 +195,7 @@ export function createDOMRange(
   anchorNode: LexicalNode,
   _anchorOffset: number,
   focusNode: LexicalNode,
-  _focusOffset: number
+  _focusOffset: number,
 ): Range | null {
   const anchorKey = anchorNode.getKey();
   const focusKey = focusNode.getKey();

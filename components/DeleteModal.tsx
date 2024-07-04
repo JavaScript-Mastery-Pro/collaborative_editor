@@ -38,32 +38,47 @@ export const DeleteModal = ({ roomId }: { roomId: string }) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>
-        <div className="min-w-9 rounded-xl bg-transparent p-2 transition-all hover:bg-[#eee]">
+        <div className="min-w-9 rounded-xl bg-transparent p-2 transition-all">
           <Image
             src="/assets/icons/delete.svg"
-            alt="more"
+            alt="delete"
             width={20}
             height={20}
-            className="size-5"
           />
         </div>
       </DialogTrigger>
-      <DialogContent className="w-full max-w-[400px] rounded-xl">
+      <DialogContent className="shad-dialog w-full max-w-[400px] rounded-xl border-none bg-doc bg-cover p-5 shadow-xl">
         <DialogHeader>
+          <Image
+            src="/assets/icons/delete-modal.svg"
+            alt="delete"
+            width={48}
+            height={48}
+            className="mb-4"
+          />
           <DialogTitle>Delete document</DialogTitle>
           <DialogDescription>
-            Are you sure you want to delete this document?
+            Are you sure you want to delete this document? This action cannot be
+            undone.
           </DialogDescription>
         </DialogHeader>
 
         <DialogFooter className="mt-5">
           <DialogClose asChild>
-            <Button type="button" variant="secondary">
-              Close
+            <Button
+              type="button"
+              variant="secondary"
+              className="w-full bg-dark-400 text-white"
+            >
+              Cancel
             </Button>
           </DialogClose>
 
-          <Button variant="destructive" onClick={deleteDocumentHandler}>
+          <Button
+            variant="destructive"
+            onClick={deleteDocumentHandler}
+            className="gradient-red w-full"
+          >
             {loading ? 'Deleting...' : 'Delete'}
           </Button>
         </DialogFooter>
