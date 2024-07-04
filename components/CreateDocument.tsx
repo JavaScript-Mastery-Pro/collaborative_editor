@@ -37,7 +37,7 @@ export const CreateDocument = ({
       onClick={createDocumentHandler}
     >
       <Image src="/assets/icons/add.svg" alt="add" width={24} height={24} />
-      Start a blank document
+      <p className="hidden sm:block">Start a blank document</p>
     </Button>
   );
 };
