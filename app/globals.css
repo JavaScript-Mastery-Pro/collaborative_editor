@@ -41,8 +41,11 @@
 .lb-comment,
 .lb-root {
   background-color: #0b1526;
-  border: none;
   color: #fff;
+}
+
+.lb-button {
+  --lb-foreground-moderate: #fff;
 }
 
 .lb-button:where([data-variant='primary']) {
@@ -71,6 +74,7 @@
     [aria-selected='true']
   ) {
   --lb-button-background: #161e30;
+
   color: #b4c6ee;
 }
 
@@ -106,6 +110,10 @@
 
 .lb-composer-editor {
   color: #fff;
+}
+
+.lb-thread :where([data-state='active']) {
+  background: #690 !important;
 }
 
 /* ======================== Lexical Editor */

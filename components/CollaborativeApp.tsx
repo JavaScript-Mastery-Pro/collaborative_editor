@@ -87,8 +87,16 @@ export function CollaborativeApp({
           <Image
             src="/assets/icons/logo.svg"
             alt="file"
-            width={123}
+            width={120}
             height={32}
+            className="hidden sm:block"
+          />
+          <Image
+            src="/assets/icons/logo-icon.svg"
+            alt="file"
+            width={32}
+            height={32}
+            className="mr-2 sm:hidden"
           />
         </Link>
 

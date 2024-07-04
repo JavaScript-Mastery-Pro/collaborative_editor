@@ -12,6 +12,14 @@ export const Header = () => {
           alt="file"
           width={120}
           height={32}
+          className="hidden sm:block"
+        />
+        <Image
+          src="/assets/icons/logo-icon.svg"
+          alt="file"
+          width={32}
+          height={32}
+          className="sm:hidden"
         />
 
         <div className="flex items-center gap-2 lg:gap-4">

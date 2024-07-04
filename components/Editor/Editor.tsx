@@ -40,7 +40,7 @@ export function Editor({ roomId }: { roomId: string }) {
   return (
     <LexicalComposer initialConfig={initialConfig}>
       <div className="editor-container size-full ">
-        <div className=" z-50 flex w-screen min-w-full justify-between overflow-auto border-y border-dark-300 bg-dark-100 pl-3 pr-4 shadow-sm">
+        <div className="custom-scrollbar z-50 flex w-screen min-w-full justify-between overflow-auto border-y border-dark-300 bg-dark-100 pl-3 pr-4 shadow-sm">
           <ToolbarPlugin />
           <DeleteModal roomId={roomId} />
         </div>
