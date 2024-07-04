@@ -15,7 +15,7 @@ const Documents = async () => {
   if (!clerkUser) redirect('/sign-in');
 
   const roomDocuments = await getDocuments(
-    clerkUser.emailAddresses[0].emailAddress
+    clerkUser.emailAddresses[0].emailAddress,
   );
 
   return (
@@ -44,7 +44,7 @@ const Documents = async () => {
                     href={`/documents/${document.id}`}
                     className="flex flex-1 items-center gap-4"
                   >
-                    <div className="bg-dark-500 hidden rounded-md p-2 sm:block">
+                    <div className="hidden rounded-md bg-dark-500 p-2 sm:block">
                       <Image
                         src="/assets/icons/doc.svg"
                         alt="file"

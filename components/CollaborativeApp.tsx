@@ -83,19 +83,14 @@ export function CollaborativeApp({
       {/* Header */}
       <div className="flex h-full min-h-[92px] w-screen min-w-full flex-nowrap items-center justify-between gap-2 overflow-auto px-4">
         {/* Logo */}
-        <div className="flex gap-2 md:flex-1">
-          <Link href="/" className=" flex items-center gap-1 ">
-            <Image
-              src="/assets/icons/doc.svg"
-              alt="file"
-              width={32}
-              height={32}
-            />
-            <p className="hidden pt-1 text-[20px] font-semibold text-[#2196f3] md:block">
-              Docs
-            </p>
-          </Link>
-        </div>
+        <Link href="/" className="md:flex-1">
+          <Image
+            src="/assets/icons/logo.svg"
+            alt="file"
+            width={123}
+            height={32}
+          />
+        </Link>
 
         {/* Title */}
         <div
@@ -111,7 +106,7 @@ export function CollaborativeApp({
               onChange={(e) => setDocumentTitle(e.target.value)}
               onKeyDown={(e) => updateTitleHandler(e)}
               disabled={!editing}
-              className="xs:max-w-full min-w-[78px] max-w-[150px] border-none bg-transparent px-0 text-left text-base font-semibold leading-[24px] focus-visible:ring-0 focus-visible:ring-offset-0 disabled:text-black sm:text-xl md:text-center"
+              className="xs:max-w-full min-w-[78px] border-none bg-transparent px-0 text-left text-base font-semibold leading-[24px] focus-visible:ring-0 focus-visible:ring-offset-0 disabled:text-black sm:text-xl md:text-center"
             />
           ) : (
             <>
