@@ -93,7 +93,7 @@ export const updateDocument = async (roomId: string, title: string) => {
   } catch (error) {
     console.error(
       'An error occurred while updating the document title:',
-      error
+      error,
     );
   }
 };
@@ -111,7 +111,7 @@ export const deleteDocument = async (roomId: string) => {
 };
 
 // Share document access - Edit (['room:write']) or Read (['room:read', 'room:presence:write'])
-export const shareDocumentAccess = async ({
+export const updateDocumentAccess = async ({
   roomId,
   email,
   userType,
@@ -144,7 +144,7 @@ export const removeCollaborator = async ({
 
     if (room.metadata.email === email) {
       throw new Error(
-        'You cannot remove the creator from the collaborators list.'
+        'You cannot remove the creator from the collaborators list.',
       );
     }
 

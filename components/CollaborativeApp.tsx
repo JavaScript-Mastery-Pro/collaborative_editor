@@ -17,12 +17,14 @@ type CollaborativeAppProps = {
   roomId: string;
   roomMetadata: RoomMetadata;
   users: User[];
+  userType: UserType;
 };
 
 export function CollaborativeApp({
   roomId,
   roomMetadata,
   users,
+  userType,
 }: CollaborativeAppProps) {
   const others = useOthers();
 
@@ -118,17 +120,23 @@ export function CollaborativeApp({
             />
           ) : (
             <>
-              <p className="line-clamp-1 text-base font-semibold leading-[24px] sm:text-xl">
+              <p className="line-clamp-1 border-l border-dark-400 pl-3 text-base font-semibold leading-[24px] sm:border-none sm:pl-0 sm:text-xl">
                 {documentTitle}
               </p>
-              <Image
-                src="/assets/icons/edit.svg"
-                alt="edit"
-                width={20}
-                height={20}
-                onClick={() => setEditing(true)}
-                className="cursor-pointer"
-              />
+              {userType === 'editor' && !loading ? (
+                <Image
+                  src="/assets/icons/edit.svg"
+                  alt="edit"
+                  width={20}
+                  height={20}
+                  onClick={() => setEditing(true)}
+                  className="cursor-pointer"
+                />
+              ) : (
+                <p className="rounded-md bg-dark-400/50 px-2 py-0.5 text-[12px] text-blue-100/50">
+                  View only
+                </p>
+              )}
             </>
           )}
           {loading && <p className="text-sm text-gray-400">saving...</p>}
@@ -158,6 +166,7 @@ export function CollaborativeApp({
             roomId={roomId}
             collaborators={users}
             creatorId={roomMetadata.creatorId}
+            currentUserType={userType}
           />
           <SignedIn>
             <UserButton />
@@ -165,7 +174,7 @@ export function CollaborativeApp({
         </div>
       </div>
 
-      <Editor roomId={roomId} />
+      <Editor roomId={roomId} userType={userType} />
 
       <div className="fixed bottom-0 left-0 w-full border-t border-dark-300 bg-dark-100 px-4 py-2">
         <p className="text-sm font-normal text-blue-100/50">

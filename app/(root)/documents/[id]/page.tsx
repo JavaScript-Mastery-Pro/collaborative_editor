@@ -22,6 +22,12 @@ const Document = async ({ params: { id } }: SearchParamProps) => {
 
   const users = await getClerkUsers(userIds);
 
+  const userType = room.usersAccesses[
+    clerkUser.emailAddresses[0].emailAddress
+  ].includes('room:write')
+    ? 'editor'
+    : 'viewer';
+
   return (
     <main className="flex w-full flex-col items-center">
       <Room roomId={id}>
@@ -29,6 +35,7 @@ const Document = async ({ params: { id } }: SearchParamProps) => {
           roomId={id}
           roomMetadata={room.metadata}
           users={users}
+          userType={userType}
         />
       </Room>
     </main>
