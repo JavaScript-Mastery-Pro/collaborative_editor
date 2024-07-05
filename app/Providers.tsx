@@ -22,7 +22,7 @@ export function Providers({ children }: { children: ReactNode }) {
         let users = await getClerkUsers();
 
         if (text) {
-          users = users.filter((user: User) => user.name.includes(text));
+          users = users.filter((user: User) => user.email.includes(text));
           return users.map((user: User) => user.email);
         }
 
