@@ -69,15 +69,15 @@ const Documents = async () => {
         </div>
       ) : (
         // Empty state
-        <div className="flex w-full max-w-[730px] flex-col items-center justify-center gap-3 rounded-lg border bg-[#f8f8f8] px-10 py-8">
+        <div className="flex w-full max-w-[730px] flex-col items-center justify-center gap-5 rounded-lg bg-dark-200 px-10 py-8">
           <Image
             src="/assets/icons/doc.svg"
             alt="file"
             width={40}
             height={40}
-            className="mx-auto grayscale"
+            className="mx-auto"
           />
-          <p className="mb-2 text-sm text-gray-400">Create a new document</p>
+
           <CreateDocument
             userId={clerkUser.id}
             email={clerkUser.emailAddresses[0].emailAddress}

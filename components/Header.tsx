@@ -1,7 +1,7 @@
 import { SignedIn, UserButton } from '@clerk/nextjs';
 import Image from 'next/image';
 
-// import { Notifications } from './Notifications';
+import { Notifications } from './Notifications';
 
 export const Header = () => {
   return (
@@ -23,7 +23,7 @@ export const Header = () => {
         />
 
         <div className="flex items-center gap-2 lg:gap-4">
-          {/* <Notifications /> */}
+          <Notifications />
           <SignedIn>
             <UserButton />
           </SignedIn>

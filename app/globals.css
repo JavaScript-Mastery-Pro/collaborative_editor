@@ -95,8 +95,14 @@
   border-radius: 4px;
 }
 
-.lb-comment-date {
+.lb-comment-date,
+.lb-lexical-mention-suggestion-user,
+.lb-composer-suggestions-list-item {
   color: #b4c6ee;
+}
+
+data-liveblocks-portal {
+  color: #b4c6ee !important;
 }
 
 .lb-root:where(:not(.lb-root .lb-root)) {
@@ -145,7 +151,6 @@ body {
 .cl-avatarBox {
   width: 36px;
   height: 36px;
-  border: 2px solid #2196f3;
 }
 
 /* LEXICAL EDITOR STYLES */

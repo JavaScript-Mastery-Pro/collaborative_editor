@@ -25,6 +25,8 @@ export function Providers({ children }: { children: ReactNode }) {
           users = users.filter((user: User) => user.name.includes(text));
           return users.map((user: User) => user.email);
         }
+
+        return users.map((user: User) => user.email);
       }}
     >
       <ClientSideSuspense fallback={<Loader />}>{children}</ClientSideSuspense>

@@ -1,5 +1,6 @@
 'use client';
 
+import { useUser } from '@clerk/clerk-react';
 import { useInboxNotifications } from '@liveblocks/react/suspense';
 import { InboxNotification, InboxNotificationList } from '@liveblocks/react-ui';
 import Image from 'next/image';
@@ -12,6 +13,9 @@ import {
 
 export const Notifications = () => {
   const { inboxNotifications } = useInboxNotifications();
+  const { user } = useUser();
+
+  console.log({ user });
 
   return (
     <Popover>
@@ -28,14 +32,19 @@ export const Notifications = () => {
         className="w-[460px] border-none bg-dark-200 shadow-lg"
       >
         <InboxNotificationList>
-          {inboxNotifications.length > 0 &&
+          {inboxNotifications.length > 0 ? (
             inboxNotifications.map((inboxNotification) => (
               <InboxNotification
                 key={inboxNotification.id}
                 inboxNotification={inboxNotification}
                 className="bg-dark-200 text-white"
               />
-            ))}
+            ))
+          ) : (
+            <p className="py-2 text-center text-dark-500">
+              No notifications yet
+            </p>
+          )}
         </InboxNotificationList>
       </PopoverContent>
     </Popover>
