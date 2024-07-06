@@ -32,4 +32,5 @@ declare type User = {
   name: string;
   email: string;
   avatar: string;
+  color: string;
 };

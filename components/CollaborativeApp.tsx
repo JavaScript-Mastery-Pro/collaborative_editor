@@ -36,6 +36,8 @@ export function CollaborativeApp({
 
   const otherUsers = others.map((other) => other.info);
 
+  console.log({ otherUsers });
+
   const updateTitleHandler = async (
     e: React.KeyboardEvent<HTMLInputElement>,
   ) => {
@@ -154,7 +156,8 @@ export function CollaborativeApp({
                       alt={user.name}
                       width={100}
                       height={100}
-                      className="inline-block size-8 rounded-full border-2 border-blue-500 ring-2 ring-dark-100"
+                      className="inline-block size-8 rounded-full ring-2 ring-dark-100"
+                      style={{ border: `3px solid ${user.color}` }}
                     />
                   </li>
                 );

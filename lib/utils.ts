@@ -44,3 +44,56 @@ export const dateConverter = (timestamp: string): string => {
       return 'Just now';
   }
 };
+
+// Function to generate a random color in hex format, excluding specified colors
+export function getRandomColor() {
+  const avoidColors = ['#000000', '#FFFFFF', '#8B4513']; // Black, White, Brown in hex format
+
+  let randomColor;
+  do {
+    // Generate random RGB values
+    const r = Math.floor(Math.random() * 256); // Random number between 0-255
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+
+    // Convert RGB to hex format
+    randomColor = `#${r.toString(16)}${g.toString(16)}${b.toString(16)}`;
+  } while (avoidColors.includes(randomColor));
+
+  return randomColor;
+}
+
+export const brightColors = [
+  '#FF5733', // Bright orange
+  '#FFBD33', // Bright yellow
+  '#FF33A8', // Bright pink
+  '#FF3380', // Bright magenta
+  '#FF6347', // Tomato
+  '#FF8C00', // Dark orange
+  '#FFD700', // Gold
+  '#1E90FF', // Dodger Blue
+  '#9370DB', // Medium Purple
+  '#FF1493', // Deep Pink
+  '#00FFFF', // Cyan/Aqua
+  '#00FF00', // Lime
+  '#7FFF00', // Chartreuse
+  '#FF4500', // Orange Red
+  '#FF69B4', // Hot Pink
+  '#FFC0CB', // Pink
+  '#BA55D3', // Medium Orchid
+  '#FFA07A', // Light Salmon
+  '#20B2AA', // Light Sea Green
+  '#32CD32', // Lime Green
+  '#FF6347', // Tomato (duplicate for variety)
+  '#FFD700', // Gold (duplicate for variety)
+];
+
+export function getUserColor(userId: string) {
+  let sum = 0;
+  for (let i = 0; i < userId.length; i++) {
+    sum += userId.charCodeAt(i);
+  }
+
+  const colorIndex = sum % brightColors.length;
+  return brightColors[colorIndex];
+}
