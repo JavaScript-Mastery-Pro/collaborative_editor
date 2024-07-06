@@ -9,15 +9,26 @@ const clerkClient = createClerkClient({
 });
 
 // Get Clerk Users
-export const getClerkUsers = async (userIds?: string[]) => {
+export const getClerkUsers = async ({
+  userIds,
+  text,
+}: {
+  userIds?: string[];
+  text?: string;
+}) => {
   try {
     const query = userIds
       ? {
           emailAddress: userIds,
         }
-      : {};
+      : {
+          query: text as string,
+        };
 
-    const { data } = await clerkClient.users.getUserList(query);
+    const { data } = await clerkClient.users.getUserList({
+      ...query,
+      limit: 500,
+    });
 
     const users = data.map((user) => ({
       id: user.id,
@@ -30,7 +41,7 @@ export const getClerkUsers = async (userIds?: string[]) => {
   } catch (error) {
     console.error(
       'An error occurred while retrieving users from Clerk:',
-      error
+      error,
     );
   }
 };

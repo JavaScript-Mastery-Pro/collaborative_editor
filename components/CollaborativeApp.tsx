@@ -146,9 +146,9 @@ export function CollaborativeApp({
         <div className="flex w-full flex-1 justify-end gap-2">
           {otherUsers.length > 0 && (
             <ul className="hidden items-center justify-end -space-x-3 overflow-hidden sm:flex">
-              {otherUsers.map((user) => {
+              {otherUsers.map((user, i) => {
                 return (
-                  <li key={user.id}>
+                  <li key={user.id + 1}>
                     <Image
                       src={user.avatar}
                       alt={user.name}

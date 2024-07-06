@@ -15,11 +15,14 @@ export function Providers({ children }: { children: ReactNode }) {
     <LiveblocksProvider
       authEndpoint="/api/liveblocks-auth"
       resolveUsers={async ({ userIds }) => {
-        const users = await getClerkUsers(userIds);
+        const users = await getClerkUsers({ userIds });
         return users;
       }}
       resolveMentionSuggestions={async ({ text }) => {
-        let users = await getClerkUsers();
+        console.log({ text });
+        let users = await getClerkUsers({ text });
+
+        console.log({ users });
 
         if (text) {
           users = users.filter((user: User) => user.email.includes(text));
