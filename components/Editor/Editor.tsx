@@ -26,10 +26,10 @@ function Placeholder() {
 
 export function Editor({
   roomId,
-  userType,
+  currentUserType,
 }: {
   roomId: string;
-  userType: UserType;
+  currentUserType: UserType;
 }) {
   const status = useEditorStatus();
 
@@ -41,7 +41,7 @@ export function Editor({
       throw error;
     },
     theme: Theme,
-    editable: userType === 'editor',
+    editable: currentUserType === 'editor',
   });
 
   return (
@@ -49,7 +49,7 @@ export function Editor({
       <div className="editor-container size-full ">
         <div className="custom-scrollbar z-50 flex w-screen min-w-full justify-between overflow-auto border-y border-dark-300 bg-dark-100 pl-3 pr-4 shadow-sm">
           <ToolbarPlugin />
-          {userType === 'editor' && <DeleteModal roomId={roomId} />}
+          {currentUserType === 'editor' && <DeleteModal roomId={roomId} />}
         </div>
 
         <div className="custom-scrollbar flex h-[calc(100vh-114px)] flex-col items-center justify-start gap-5 overflow-auto px-5 pb-16 pt-5 lg:flex-row lg:items-start lg:justify-center  xl:gap-10 xl:pb-20 xl:pt-10">
@@ -73,7 +73,7 @@ export function Editor({
                 placeholder={<Placeholder />}
                 ErrorBoundary={LexicalErrorBoundary}
               />
-              {userType === 'editor' && <FloatingToolbarPlugin />}
+              {currentUserType === 'editor' && <FloatingToolbarPlugin />}
 
               <HistoryPlugin />
               <AutoFocusPlugin />

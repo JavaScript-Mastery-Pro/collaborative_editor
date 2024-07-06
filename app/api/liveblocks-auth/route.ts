@@ -13,8 +13,6 @@ export async function POST() {
 
   if (!clerkUser) redirect('/sign-in');
 
-  console.log('color', getUserColor(clerkUser.id));
-
   const user = {
     id: clerkUser.id,
     info: {

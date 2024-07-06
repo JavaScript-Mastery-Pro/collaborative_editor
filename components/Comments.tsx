@@ -22,8 +22,6 @@ export const Comments = () => {
 const ThreadWrapper = ({ thread }: { thread: ThreadData<BaseMetadata> }) => {
   const isActive = useIsThreadActive(thread.id);
 
-  console.log('isActive', isActive);
-
   return (
     <Thread
       thread={thread}

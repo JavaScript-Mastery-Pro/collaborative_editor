@@ -17,14 +17,14 @@ type CollaborativeAppProps = {
   roomId: string;
   roomMetadata: RoomMetadata;
   users: User[];
-  userType: UserType;
+  currentUserType: UserType;
 };
 
 export function CollaborativeApp({
   roomId,
   roomMetadata,
   users,
-  userType,
+  currentUserType,
 }: CollaborativeAppProps) {
   const others = useOthers();
 
@@ -35,8 +35,6 @@ export function CollaborativeApp({
   const inputRef = useRef<HTMLInputElement>(null);
 
   const otherUsers = others.map((other) => other.info);
-
-  console.log({ otherUsers });
 
   const updateTitleHandler = async (
     e: React.KeyboardEvent<HTMLInputElement>,
@@ -125,7 +123,7 @@ export function CollaborativeApp({
               <p className="line-clamp-1 border-l border-dark-400 pl-3 text-base font-semibold leading-[24px] sm:border-none sm:pl-0 sm:text-xl">
                 {documentTitle}
               </p>
-              {userType === 'editor' && !loading ? (
+              {currentUserType === 'editor' && !loading ? (
                 <Image
                   src="/assets/icons/edit.svg"
                   alt="edit"
@@ -169,7 +167,7 @@ export function CollaborativeApp({
             roomId={roomId}
             collaborators={users}
             creatorId={roomMetadata.creatorId}
-            currentUserType={userType}
+            currentUserType={currentUserType}
           />
           <SignedIn>
             <UserButton />
@@ -177,7 +175,7 @@ export function CollaborativeApp({
         </div>
       </div>
 
-      <Editor roomId={roomId} userType={userType} />
+      <Editor roomId={roomId} currentUserType={currentUserType} />
 
       <div className="fixed bottom-0 left-0 w-full border-t border-dark-300 bg-dark-100 px-4 py-2">
         <p className="text-sm font-normal text-blue-100/50">

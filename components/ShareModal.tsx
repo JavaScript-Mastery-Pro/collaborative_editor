@@ -41,7 +41,7 @@ export const ShareModal = ({
   currentUserType,
 }: ShareDocumentDialogProps) => {
   const [email, setEmail] = useState('');
-  const [userType, setUserType] = useState('viewer');
+  const [userType, setUserType] = useState<UserType>('viewer');
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -140,17 +140,17 @@ const Collaborator = ({
   creatorId: string;
   collaborator: User;
 }) => {
-  const [userType, setUserType] = useState('viewer');
+  const [userType, setUserType] = useState(collaborator.userType || 'viewer');
   const [loading, setLoading] = useState(false);
 
-  const shareDocumentHandler = async () => {
+  const shareDocumentHandler = async (type: string) => {
     setLoading(true);
 
     try {
       await updateDocumentAccess({
         roomId,
         email,
-        userType: userType as UserType,
+        userType: type as UserType,
       });
     } catch (error) {
       console.log('Error notif:', error);
@@ -179,8 +179,10 @@ const Collaborator = ({
         />
         <div>
           <p className="line-clamp-1 text-sm font-semibold leading-4 text-white">
-            {collaborator.name}{' '}
-            <span className="pl-1 text-sm">{loading && 'updating...'}</span>
+            {collaborator.name}
+            <span className="pl-2 text-[10px] text-blue-100">
+              {loading && 'updating...'}
+            </span>
           </p>
           <p className="text-sm font-light text-blue-100">
             {collaborator.email}
@@ -194,7 +196,7 @@ const Collaborator = ({
         <div className="flex items-center">
           <UserTypeSelector
             userType={userType as UserType}
-            setUserType={setUserType}
+            setUserType={setUserType || 'viewer'}
             onClickHandler={shareDocumentHandler}
           />
           <Button
@@ -216,26 +218,32 @@ const UserTypeSelector = ({
   onClickHandler,
 }: {
   userType: string;
-  setUserType: React.Dispatch<React.SetStateAction<string>>;
-  onClickHandler?: () => void;
+  setUserType: React.Dispatch<React.SetStateAction<UserType>>;
+  onClickHandler?: (value: string) => void;
 }) => {
+  const accessChangeHandler = (type: UserType) => {
+    setUserType(type);
+    onClickHandler && onClickHandler(type);
+  };
+
   return (
-    <Select value={userType} onValueChange={setUserType}>
+    <Select
+      value={userType}
+      onValueChange={(type: UserType) => accessChangeHandler(type)}
+    >
       <SelectTrigger className="w-fit border-none bg-transparent text-blue-100">
         <SelectValue />
       </SelectTrigger>
       <SelectContent className="border-none bg-dark-200 ">
         <SelectItem
           value="viewer"
-          className="bg-dark-200 text-blue-100 focus:bg-dark-300 focus:text-blue-100"
-          onClick={onClickHandler}
+          className="cursor-pointer bg-dark-200 text-blue-100 focus:bg-dark-300 focus:text-blue-100"
         >
           can view
         </SelectItem>
         <SelectItem
           value="editor"
-          className="bg-dark-200 text-blue-100 focus:bg-dark-300 focus:text-blue-100"
-          onClick={onClickHandler}
+          className="cursor-pointer bg-dark-200 text-blue-100 focus:bg-dark-300 focus:text-blue-100"
         >
           can edit
         </SelectItem>
