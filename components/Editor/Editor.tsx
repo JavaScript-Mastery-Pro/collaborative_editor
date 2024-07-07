@@ -52,7 +52,7 @@ export function Editor({
           {currentUserType === 'editor' && <DeleteModal roomId={roomId} />}
         </div>
 
-        <div className="custom-scrollbar flex h-[calc(100vh-114px)] flex-col items-center justify-start gap-5 overflow-auto px-5 pb-16 pt-5 lg:flex-row lg:items-start lg:justify-center  xl:gap-10 xl:pb-20 xl:pt-10">
+        <div className="custom-scrollbar flex h-[calc(100vh-114px)] flex-col items-center justify-start gap-5 overflow-auto px-5 pb-20 pt-5 lg:flex-row lg:items-start lg:justify-center  xl:gap-10 xl:pb-20 xl:pt-10">
           {status === 'not-loaded' || status === 'loading' ? (
             <div className="flex size-full h-screen items-center justify-center gap-3 text-[#666666]">
               <Image

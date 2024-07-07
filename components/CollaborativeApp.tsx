@@ -83,7 +83,7 @@ export function CollaborativeApp({
   return (
     <div className="flex size-full max-h-screen flex-1 flex-col items-center overflow-hidden">
       {/* Header */}
-      <div className="flex h-full min-h-[92px] w-screen min-w-full flex-nowrap items-center justify-between gap-2 overflow-auto px-4">
+      <div className="flex h-full min-h-[92px] w-screen min-w-full flex-nowrap !items-center justify-between gap-2 overflow-auto px-4">
         {/* Logo */}
         <Link href="/" className="md:flex-1">
           <Image
@@ -91,14 +91,14 @@ export function CollaborativeApp({
             alt="file"
             width={120}
             height={32}
-            className="hidden sm:block"
+            className="hidden md:block"
           />
           <Image
             src="/assets/icons/logo-icon.svg"
             alt="file"
             width={32}
             height={32}
-            className="mr-2 sm:hidden"
+            className="mr-2 md:hidden"
           />
         </Link>
 
@@ -120,7 +120,7 @@ export function CollaborativeApp({
             />
           ) : (
             <>
-              <p className="line-clamp-1 border-l border-dark-400 pl-3 text-base font-semibold leading-[24px] sm:border-none sm:pl-0 sm:text-xl">
+              <p className="line-clamp-1 border-dark-400 text-base font-semibold leading-[24px] sm:pl-0 sm:text-xl">
                 {documentTitle}
               </p>
               {currentUserType === 'editor' && !loading ? (
@@ -143,7 +143,7 @@ export function CollaborativeApp({
         </div>
 
         {/* Collaborators & Actions */}
-        <div className="flex w-full flex-1 justify-end gap-2">
+        <div className="flex w-full flex-1 justify-end gap-2 sm:gap-3">
           {otherUsers.length > 0 && (
             <ul className="hidden items-center justify-end -space-x-3 overflow-hidden sm:flex">
               {otherUsers.map((user, i) => {

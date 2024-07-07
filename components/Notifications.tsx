@@ -38,6 +38,17 @@ export const Notifications = () => {
                 key={inboxNotification.id}
                 inboxNotification={inboxNotification}
                 className="bg-dark-200 text-white"
+                href={`/documents/${inboxNotification.roomId}`}
+                showActions={false}
+                kinds={{
+                  thread: (props) => (
+                    <InboxNotification.Thread
+                      {...props}
+                      showRoomName={false}
+                      showActions={false}
+                    />
+                  ),
+                }}
               />
             ))
           ) : (

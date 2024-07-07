@@ -75,7 +75,7 @@ export const ShareModal = ({
             alt="share"
             width={20}
             height={20}
-            className="size-4 md:size-5"
+            className="min-w-4 md:size-5"
           />
           <p className="mr-1 hidden sm:block">Share</p>
         </Button>

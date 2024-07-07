@@ -64,28 +64,29 @@ export function getRandomColor() {
 }
 
 export const brightColors = [
-  '#FF5733', // Bright orange
-  '#FFBD33', // Bright yellow
-  '#FF33A8', // Bright pink
-  '#FF3380', // Bright magenta
-  '#FF6347', // Tomato
-  '#FF8C00', // Dark orange
-  '#FFD700', // Gold
-  '#1E90FF', // Dodger Blue
-  '#9370DB', // Medium Purple
-  '#FF1493', // Deep Pink
-  '#00FFFF', // Cyan/Aqua
-  '#00FF00', // Lime
-  '#7FFF00', // Chartreuse
   '#FF4500', // Orange Red
-  '#FF69B4', // Hot Pink
-  '#FFC0CB', // Pink
+  '#FF6347', // Tomato
+  '#FF7F50', // Coral
+  '#FF8C00', // Dark Orange
+  '#FFB6C1', // Light Pink
+  '#FF1493', // Deep Pink
+  '#DB7093', // Pale Violet Red
+  '#CD5C5C', // Indian Red
   '#BA55D3', // Medium Orchid
-  '#FFA07A', // Light Salmon
-  '#20B2AA', // Light Sea Green
+  '#9370DB', // Medium Purple
+  '#8A2BE2', // Blue Violet
+  '#7B68EE', // Medium Slate Blue
+  '#5F9EA0', // Cadet Blue
+  '#4682B4', // Steel Blue
+  '#1E90FF', // Dodger Blue
+  '#00CED1', // Dark Turquoise
+  '#40E0D0', // Turquoise
+  '#48D1CC', // Medium Turquoise
+  '#00FA9A', // Medium Spring Green
+  '#00FF7F', // Spring Green
   '#32CD32', // Lime Green
-  '#FF6347', // Tomato (duplicate for variety)
-  '#FFD700', // Gold (duplicate for variety)
+  '#9ACD32', // Yellow Green
+  '#ADFF2F', // Green Yellow
 ];
 
 export function getUserColor(userId: string) {

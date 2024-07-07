@@ -39,7 +39,8 @@
 
 /* ======================== Liveblocks Override */
 .lb-comment,
-.lb-root {
+.lb-root,
+.lb-comment-reaction {
   background-color: #0b1526;
   color: #fff;
 }
@@ -97,7 +98,8 @@
 
 .lb-comment-date,
 .lb-lexical-mention-suggestion-user,
-.lb-composer-suggestions-list-item {
+.lb-composer-suggestions-list-item,
+.lb-inbox-notification-date {
   color: #b4c6ee;
 }
 
