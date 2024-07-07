@@ -18,7 +18,7 @@ export function Providers({ children }: { children: ReactNode }) {
         const users = await getClerkUsers({ userIds });
         return users;
       }}
-      resolveMentionSuggestions={async ({ text }) => {
+      resolveMentionSuggestions={async ({ text, roomId }) => {
         console.log({ text });
         const users = await getClerkUsers({ text });
 

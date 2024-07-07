@@ -107,7 +107,7 @@ export const ShareModal = ({
             onClick={shareDocumentHandler}
             className="gradient-blue flex gap-1 px-5 hover:bg-[#3987cf]"
           >
-            {loading ? 'Sending Invite...' : 'Invite'}
+            {loading ? 'Sending...' : 'Invite'}
           </Button>
         </div>
 

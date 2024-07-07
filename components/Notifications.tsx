@@ -32,7 +32,13 @@ export const Notifications = () => {
         className="w-[460px] border-none bg-dark-200 shadow-lg"
       >
         <InboxNotificationList>
-          {inboxNotifications.length > 0 ? (
+          {inboxNotifications.length <= 0 && (
+            <p className="py-2 text-center text-dark-500">
+              No notifications yet
+            </p>
+          )}
+
+          {inboxNotifications.length > 0 &&
             inboxNotifications.map((inboxNotification) => (
               <InboxNotification
                 key={inboxNotification.id}
@@ -50,12 +56,7 @@ export const Notifications = () => {
                   ),
                 }}
               />
-            ))
-          ) : (
-            <p className="py-2 text-center text-dark-500">
-              No notifications yet
-            </p>
-          )}
+            ))}
         </InboxNotificationList>
       </PopoverContent>
     </Popover>
