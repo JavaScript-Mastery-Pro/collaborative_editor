@@ -43,6 +43,26 @@
   height: fit-content !important;
 }
 
+.cl-cardBox,
+.cl-signIn-start,
+.cl-signUp-start,
+.cl-footer {
+  background: #060d18;
+  box-shadow: none;
+  padding: 20px;
+}
+
+.cl-socialButtonsBlockButton,
+.cl-socialButtonsBlockButton:hover {
+  height: 40px;
+  background-color: #3371ff;
+  color: #fff;
+}
+
+.cl-logoBox {
+  height: 52px;
+}
+
 /* ======================== Liveblocks Override */
 
 .lb-root {
