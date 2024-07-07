@@ -80,12 +80,10 @@ export function CollaborativeApp({
     }
   }, [editing]);
 
-  console.log({ currentUserType });
-
   return (
     <div className="flex size-full max-h-screen flex-1 flex-col items-center overflow-hidden">
       {/* Header */}
-      <div className="flex h-full min-h-[92px] w-screen min-w-full flex-nowrap !items-center justify-between gap-2 overflow-auto px-4">
+      <div className="flex min-h-[92px] w-screen min-w-full flex-nowrap !items-center justify-between gap-2 px-4">
         {/* Logo */}
         <Link href="/" className="md:flex-1">
           <Image

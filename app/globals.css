@@ -37,10 +37,16 @@
   background: #7878a3;
 }
 
+/* ======================== Clerk Override */
+
+.cl-userButtonTrigger {
+  height: fit-content !important;
+}
+
 /* ======================== Liveblocks Override */
 
 .lb-root {
-  --lb-accent-subtle: #0f1c34;
+  --lb-accent-subtle: #0b1527;
 }
 
 .lb-comment,
