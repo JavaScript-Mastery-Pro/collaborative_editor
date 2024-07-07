@@ -38,6 +38,11 @@
 }
 
 /* ======================== Liveblocks Override */
+
+.lb-root {
+  --lb-accent-subtle: #0f1c34;
+}
+
 .lb-comment,
 .lb-root,
 .lb-comment-reaction {
@@ -90,16 +95,18 @@
 }
 
 .lb-comment-content {
-  background: #12213b;
+  background: #0f1c34;
   margin-top: 16px;
   padding: 12px;
   border-radius: 4px;
+  font-size: 14px;
 }
 
 .lb-comment-date,
 .lb-lexical-mention-suggestion-user,
 .lb-composer-suggestions-list-item,
-.lb-inbox-notification-date {
+.lb-inbox-notification-date,
+.lb-comment-author {
   color: #b4c6ee;
 }
 
@@ -114,6 +121,7 @@ data-liveblocks-portal {
 
 .lb-composer-editor :where([data-placeholder]) {
   color: #b4c6ee;
+  font-size: 14px;
 }
 
 .lb-composer-editor {

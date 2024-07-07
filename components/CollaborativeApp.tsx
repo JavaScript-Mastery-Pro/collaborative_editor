@@ -80,6 +80,8 @@ export function CollaborativeApp({
     }
   }, [editing]);
 
+  console.log({ currentUserType });
+
   return (
     <div className="flex size-full max-h-screen flex-1 flex-col items-center overflow-hidden">
       {/* Header */}
@@ -123,22 +125,29 @@ export function CollaborativeApp({
               <p className="line-clamp-1 border-dark-400 text-base font-semibold leading-[24px] sm:pl-0 sm:text-xl">
                 {documentTitle}
               </p>
-              {currentUserType === 'editor' && !loading ? (
-                <Image
-                  src="/assets/icons/edit.svg"
-                  alt="edit"
-                  width={20}
-                  height={20}
-                  onClick={() => setEditing(true)}
-                  className="cursor-pointer"
-                />
-              ) : (
-                <p className="rounded-md bg-dark-400/50 px-2 py-0.5 text-[12px] text-blue-100/50">
-                  View only
-                </p>
-              )}
             </>
           )}
+
+          {/* Edit title icon */}
+          {currentUserType === 'editor' && !editing && (
+            <Image
+              src="/assets/icons/edit.svg"
+              alt="edit"
+              width={24}
+              height={24}
+              onClick={() => setEditing(true)}
+              className="cursor-pointer"
+            />
+          )}
+
+          {/* View only user indicator */}
+          {currentUserType !== 'editor' && !editing && (
+            <p className="rounded-md bg-dark-400/50 px-2 py-0.5 text-[12px] text-blue-100/50">
+              View only
+            </p>
+          )}
+
+          {/* Saving title indicator */}
           {loading && <p className="text-sm text-gray-400">saving...</p>}
         </div>
 
