@@ -82,7 +82,7 @@ export const Notifications = () => {
                           </InboxNotification.Icon>
                         }
                       >
-                        <></>
+                        {props.children}
                       </InboxNotification.Custom>
                     );
                   },
