@@ -1,7 +1,7 @@
 'use client';
 
 import { SignedIn, UserButton } from '@clerk/nextjs';
-import { useOthers } from '@liveblocks/react/suspense';
+import { useOthers, useSelf } from '@liveblocks/react/suspense';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
@@ -27,6 +27,7 @@ export function CollaborativeApp({
   currentUserType,
 }: CollaborativeAppProps) {
   const others = useOthers();
+  const user = useSelf();
 
   const [documentTitle, setDocumentTitle] = useState(roomMetadata.title);
   const [editing, setEditing] = useState(false);
@@ -175,6 +176,7 @@ export function CollaborativeApp({
             collaborators={users}
             creatorId={roomMetadata.creatorId}
             currentUserType={currentUserType}
+            user={user.info}
           />
           <SignedIn>
             <UserButton />

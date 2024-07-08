@@ -110,6 +110,10 @@
   color: #b4c6ee;
 }
 
+.lb-inbox-notification-list-item:where(:not(:last-of-type)) {
+  border-bottom: none;
+}
+
 .lb-comment-body,
 .lb-dropdown-item,
 .lb-dropdown-item-icon {

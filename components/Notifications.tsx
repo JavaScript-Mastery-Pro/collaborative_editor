@@ -1,6 +1,5 @@
 'use client';
 
-import { useUser } from '@clerk/clerk-react';
 import { useInboxNotifications } from '@liveblocks/react/suspense';
 import { InboxNotification, InboxNotificationList } from '@liveblocks/react-ui';
 import Image from 'next/image';
@@ -13,9 +12,10 @@ import {
 
 export const Notifications = () => {
   const { inboxNotifications } = useInboxNotifications();
-  const { user } = useUser();
 
-  console.log({ user });
+  const unreadNotifications = inboxNotifications.filter(
+    (notification) => !notification.readAt,
+  );
 
   return (
     <Popover>
@@ -32,14 +32,14 @@ export const Notifications = () => {
         className="w-[460px] border-none bg-dark-200 shadow-lg"
       >
         <InboxNotificationList>
-          {inboxNotifications.length <= 0 && (
+          {unreadNotifications.length <= 0 && (
             <p className="py-2 text-center text-dark-500">
               No notifications yet
             </p>
           )}
 
           {inboxNotifications.length > 0 &&
-            inboxNotifications.map((inboxNotification) => (
+            unreadNotifications.map((inboxNotification) => (
               <InboxNotification
                 key={inboxNotification.id}
                 inboxNotification={inboxNotification}
@@ -54,6 +54,30 @@ export const Notifications = () => {
                       showActions={false}
                     />
                   ),
+                  $documentAccess: (props) => {
+                    const { title, avatar } =
+                      props.inboxNotification.activities[0].data;
+
+                    return (
+                      <InboxNotification.Custom
+                        {...props}
+                        title={title}
+                        aside={
+                          <InboxNotification.Icon className="bg-transparent">
+                            <Image
+                              src={(avatar as string) || ''}
+                              width={36}
+                              height={36}
+                              alt="avatar"
+                              className="rounded-full"
+                            />
+                          </InboxNotification.Icon>
+                        }
+                      >
+                        <></>
+                      </InboxNotification.Custom>
+                    );
+                  },
                 }}
               />
             ))}

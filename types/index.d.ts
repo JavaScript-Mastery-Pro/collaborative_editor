@@ -21,12 +21,6 @@ declare type CreateDocumentParams = {
   email: string;
 };
 
-declare type ShareDocumentParams = {
-  roomId: string;
-  email: string;
-  userType: UserType;
-};
-
 declare type User = {
   id: string;
   name: string;
@@ -34,4 +28,11 @@ declare type User = {
   avatar: string;
   color: string;
   userType?: UserType;
+};
+
+declare type ShareDocumentParams = {
+  roomId: string;
+  email: string;
+  userType: UserType;
+  updatedBy: User;
 };

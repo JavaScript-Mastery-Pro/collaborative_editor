@@ -32,6 +32,7 @@ type ShareDocumentDialogProps = {
   collaborators: User[];
   creatorId: string;
   currentUserType: UserType;
+  user: User;
 };
 
 export const ShareModal = ({
@@ -39,6 +40,7 @@ export const ShareModal = ({
   collaborators,
   creatorId,
   currentUserType,
+  user,
 }: ShareDocumentDialogProps) => {
   const [email, setEmail] = useState('');
   const [userType, setUserType] = useState<UserType>('viewer');
@@ -53,6 +55,7 @@ export const ShareModal = ({
         roomId,
         email,
         userType: userType as UserType,
+        updatedBy: user,
       });
 
       if (room) setEmail('');
@@ -120,6 +123,7 @@ export const ShareModal = ({
                 creatorId={creatorId}
                 email={collaborator.email}
                 collaborator={collaborator}
+                user={user}
               />
             ))}
           </ul>
@@ -134,11 +138,13 @@ const Collaborator = ({
   creatorId,
   collaborator,
   email,
+  user,
 }: {
   roomId: string;
   email: string;
   creatorId: string;
   collaborator: User;
+  user: User;
 }) => {
   const [userType, setUserType] = useState(collaborator.userType || 'viewer');
   const [loading, setLoading] = useState(false);
@@ -151,6 +157,7 @@ const Collaborator = ({
         roomId,
         email,
         userType: type as UserType,
+        updatedBy: user,
       });
     } catch (error) {
       console.log('Error notif:', error);

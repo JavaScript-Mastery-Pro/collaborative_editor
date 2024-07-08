@@ -2,16 +2,13 @@
 
 import console from 'console';
 
-import { Liveblocks } from '@liveblocks/node';
 import { nanoid } from 'nanoid';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
-import { getAccessType, parseStringify } from '../utils';
+import { liveblocks } from '@/lib/liveblocks';
 
-const liveblocks = new Liveblocks({
-  secret: process.env.LIVEBLOCKS_SECRET_KEY as string,
-});
+import { getAccessType, parseStringify } from '../utils';
 
 // Create new document
 export const createDocument = async ({
@@ -115,6 +112,7 @@ export const updateDocumentAccess = async ({
   roomId,
   email,
   userType,
+  updatedBy,
 }: ShareDocumentParams) => {
   try {
     const usersAccesses: RoomAccesses = {
@@ -124,6 +122,33 @@ export const updateDocumentAccess = async ({
     const room = await liveblocks.updateRoom(roomId, {
       usersAccesses,
     });
+
+    if (room) {
+      const notificationId = nanoid();
+
+      await liveblocks.triggerInboxNotification({
+        // The ID of the user that will receive the inbox notification
+        userId: email,
+
+        // The custom notification kind, must start with a $
+        kind: '$documentAccess',
+
+        // Custom ID for this specific notification
+        subjectId: notificationId,
+
+        // Custom data related to the activity that you need to render the inbox notification
+        activityData: {
+          userType,
+          title: `${updatedBy.name} shared a document with you.`,
+          updatedBy: updatedBy.name,
+          avatar: updatedBy.avatar,
+          email: updatedBy.email,
+        },
+
+        // Optional, define the room ID the notification was sent from
+        roomId,
+      });
+    }
 
     revalidatePath(`/documents/${roomId}`);
     return parseStringify(room);
