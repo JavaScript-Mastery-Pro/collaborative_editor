@@ -17,8 +17,6 @@ export const Notifications = () => {
     (notification) => !notification.readAt, // Filter unread notifications
   );
 
-  console.log({ inboxNotifications });
-
   return (
     <Popover>
       <PopoverTrigger className="flex size-10 items-center justify-center rounded-lg">
