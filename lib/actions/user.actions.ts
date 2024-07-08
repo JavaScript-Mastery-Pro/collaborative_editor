@@ -17,17 +17,23 @@ export const getClerkUsers = async ({
   text?: string;
 }) => {
   try {
-    const query = userIds
-      ? {
-          emailAddress: userIds,
-        }
-      : {
-          query: text as string,
-        };
+    let query = {};
+
+    if (userIds) {
+      query = {
+        emailAddress: userIds,
+      };
+    }
+
+    // Clerk API requires at least 3 characters to search
+    if (text && text.length >= 3) {
+      query = {
+        query: text as string,
+      };
+    }
 
     const { data } = await clerkClient.users.getUserList({
       ...query,
-      limit: 500,
     });
 
     const users = data.map((user) => ({

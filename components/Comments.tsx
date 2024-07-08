@@ -9,7 +9,7 @@ export const Comments = () => {
   const { threads } = useThreads();
 
   return (
-    <div className="flex w-full flex-col items-center justify-center space-y-4 lg:w-fit ">
+    <div className="mb-20 flex w-full flex-col items-center justify-center space-y-4 lg:w-fit ">
       <Composer className="w-full max-w-[800px] bg-dark-200 shadow-sm lg:w-[350px]" />
 
       {threads.map((thread) => (
