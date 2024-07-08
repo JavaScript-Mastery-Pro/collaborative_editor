@@ -16,6 +16,9 @@
   .shad-dialog button {
     @apply focus:ring-0 focus:ring-offset-0 focus-visible:border-none focus-visible:outline-none focus-visible:ring-transparent focus-visible:ring-offset-0 !important;
   }
+  .shad-select svg {
+    @apply ml-1 mt-1;
+  }
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -38,7 +41,6 @@
 }
 
 /* ======================== Clerk Override */
-
 .cl-userButtonTrigger {
   height: fit-content !important;
 }

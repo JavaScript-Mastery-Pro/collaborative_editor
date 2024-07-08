@@ -108,7 +108,7 @@ export const ShareModal = ({
           <Button
             type="submit"
             onClick={shareDocumentHandler}
-            className="gradient-blue flex gap-1 px-5 hover:bg-[#3987cf]"
+            className="gradient-blue flex h-full gap-1 px-5 hover:bg-[#3987cf]"
           >
             {loading ? 'Sending...' : 'Invite'}
           </Button>
@@ -238,7 +238,7 @@ const UserTypeSelector = ({
       value={userType}
       onValueChange={(type: UserType) => accessChangeHandler(type)}
     >
-      <SelectTrigger className="w-fit border-none bg-transparent text-blue-100">
+      <SelectTrigger className="shad-select w-fit border-none bg-transparent text-blue-100">
         <SelectValue />
       </SelectTrigger>
       <SelectContent className="border-none bg-dark-200 ">
