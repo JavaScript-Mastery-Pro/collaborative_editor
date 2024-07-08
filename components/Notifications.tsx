@@ -56,15 +56,12 @@ export const Notifications = () => {
                       showActions={false}
                     />
                   ),
-                  textMention: (props) => {
-                    console.log(props);
-                    return (
-                      <InboxNotification.TextMention
-                        {...props}
-                        showRoomName={false}
-                      />
-                    );
-                  },
+                  textMention: (props) => (
+                    <InboxNotification.TextMention
+                      {...props}
+                      showRoomName={false}
+                    />
+                  ),
                   $documentAccess: (props) => {
                     const { title, avatar } =
                       props.inboxNotification.activities[0].data;
