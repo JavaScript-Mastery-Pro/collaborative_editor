@@ -14,8 +14,10 @@ export const Notifications = () => {
   const { inboxNotifications } = useInboxNotifications();
 
   const unreadNotifications = inboxNotifications.filter(
-    (notification) => !notification.readAt,
+    (notification) => !notification.readAt, // Filter unread notifications
   );
+
+  console.log({ inboxNotifications });
 
   return (
     <Popover>
@@ -38,7 +40,7 @@ export const Notifications = () => {
             </p>
           )}
 
-          {inboxNotifications.length > 0 &&
+          {unreadNotifications.length > 0 &&
             unreadNotifications.map((inboxNotification) => (
               <InboxNotification
                 key={inboxNotification.id}
@@ -54,6 +56,15 @@ export const Notifications = () => {
                       showActions={false}
                     />
                   ),
+                  textMention: (props) => {
+                    console.log(props);
+                    return (
+                      <InboxNotification.TextMention
+                        {...props}
+                        showRoomName={false}
+                      />
+                    );
+                  },
                   $documentAccess: (props) => {
                     const { title, avatar } =
                       props.inboxNotification.activities[0].data;
