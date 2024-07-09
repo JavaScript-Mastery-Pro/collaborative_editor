@@ -4,7 +4,6 @@
 
 @import '@liveblocks/react-ui/styles.css';
 @import '@liveblocks/react-lexical/styles.css';
-@import '@liveblocks/react-ui/styles/dark/attributes.css';
 
 @layer utilities {
   .gradient-blue {
@@ -72,7 +71,7 @@
 /* ======================== Liveblocks Override */
 
 .lb-root {
-  --lb-accent-subtle: #0b1527;
+  --lb-accent-subtle: #0f1c34;
 }
 
 .lb-comment,
