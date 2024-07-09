@@ -1,16 +1,19 @@
 'use client';
 
+import { useUser } from '@clerk/clerk-react';
 import {
   ClientSideSuspense,
   LiveblocksProvider,
 } from '@liveblocks/react/suspense';
 import { ReactNode } from 'react';
 
-import { getClerkUsers } from '@/lib/actions/user.actions';
+import { getClerkUsers, getDocumentUsers } from '@/lib/actions/user.actions';
 
 import { Loader } from '@/components/Loader';
 
 export function Providers({ children }: { children: ReactNode }) {
+  const { user: clerkUser } = useUser();
+
   return (
     <LiveblocksProvider
       authEndpoint="/api/liveblocks-auth"
@@ -19,9 +22,13 @@ export function Providers({ children }: { children: ReactNode }) {
         return users;
       }}
       resolveMentionSuggestions={async ({ text, roomId }) => {
-        const users = await getClerkUsers({ text });
-
-        return users.map((user: User) => user.email);
+        // Users that has access to the document
+        const roomUsers = await getDocumentUsers({
+          roomId,
+          currentUser: clerkUser?.emailAddresses[0].emailAddress!,
+          text,
+        });
+        return roomUsers;
       }}
     >
       <ClientSideSuspense fallback={<Loader />}>{children}</ClientSideSuspense>

@@ -2,6 +2,8 @@
 
 import { createClerkClient } from '@clerk/clerk-sdk-node';
 
+import { liveblocks } from '@/lib/liveblocks';
+
 import { parseStringify } from '../utils';
 
 const clerkClient = createClerkClient({
@@ -9,31 +11,10 @@ const clerkClient = createClerkClient({
 });
 
 // Get Clerk Users
-export const getClerkUsers = async ({
-  userIds,
-  text,
-}: {
-  userIds?: string[];
-  text?: string;
-}) => {
+export const getClerkUsers = async ({ userIds }: { userIds: string[] }) => {
   try {
-    let query = {};
-
-    if (userIds) {
-      query = {
-        emailAddress: userIds,
-      };
-    }
-
-    // Clerk API requires at least 3 characters to search
-    if (text && text.length >= 3) {
-      query = {
-        query: text as string,
-      };
-    }
-
     const { data } = await clerkClient.users.getUserList({
-      ...query,
+      emailAddress: userIds,
     });
 
     const users = data.map((user) => ({
@@ -47,6 +28,39 @@ export const getClerkUsers = async ({
   } catch (error) {
     console.error(
       'An error occurred while retrieving users from Clerk:',
+      error,
+    );
+  }
+};
+
+// Get one document
+export const getDocumentUsers = async ({
+  roomId,
+  currentUser,
+  text,
+}: {
+  roomId: string;
+  currentUser: string;
+  text: string;
+}) => {
+  try {
+    const room = await liveblocks.getRoom(roomId);
+
+    let users = Object.keys(room.usersAccesses).filter(
+      (email) => email !== currentUser,
+    );
+
+    if (text.length) {
+      const loweredText = text.toLowerCase();
+      users = users.filter((email: string) =>
+        email.toLowerCase().includes(loweredText),
+      );
+    }
+
+    return parseStringify(users);
+  } catch (error) {
+    console.error(
+      'An error occurred while retrieving the list of room users:',
       error,
     );
   }
