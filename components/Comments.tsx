@@ -10,7 +10,7 @@ export const Comments = () => {
 
   return (
     <div className="mb-20 flex w-full flex-col items-center justify-center space-y-4 lg:w-fit ">
-      <Composer className="w-full max-w-[800px] bg-dark-200 shadow-sm lg:w-[350px]" />
+      <Composer className="w-full max-w-[800px] border border-dark-300 bg-dark-200 shadow-sm lg:w-[350px]" />
 
       {threads.map((thread) => (
         <ThreadWrapper key={thread.id} thread={thread} />
@@ -27,8 +27,9 @@ const ThreadWrapper = ({ thread }: { thread: ThreadData<BaseMetadata> }) => {
       thread={thread}
       data-state={isActive ? 'active' : null}
       className={cn(
-        'w-full max-w-[800px] border border-dark-200 bg-dark-200 shadow-sm lg:w-[350px] transition-all',
+        'w-full max-w-[800px] border border-dark-300 bg-dark-200 shadow-sm lg:w-[350px] transition-all',
         isActive && 'border-blue-500 shadow-md',
+        thread.resolved && 'opacity-40',
       )}
     />
   );
