@@ -64,29 +64,25 @@ export function getRandomColor() {
 }
 
 export const brightColors = [
-  '#FF4500', // Orange Red
-  '#FF6347', // Tomato
-  '#FF7F50', // Coral
-  '#FF8C00', // Dark Orange
-  '#FFB6C1', // Light Pink
-  '#FF1493', // Deep Pink
-  '#DB7093', // Pale Violet Red
-  '#CD5C5C', // Indian Red
-  '#BA55D3', // Medium Orchid
-  '#9370DB', // Medium Purple
-  '#8A2BE2', // Blue Violet
-  '#7B68EE', // Medium Slate Blue
-  '#5F9EA0', // Cadet Blue
-  '#4682B4', // Steel Blue
-  '#1E90FF', // Dodger Blue
-  '#00CED1', // Dark Turquoise
-  '#40E0D0', // Turquoise
-  '#48D1CC', // Medium Turquoise
-  '#00FA9A', // Medium Spring Green
-  '#00FF7F', // Spring Green
-  '#32CD32', // Lime Green
-  '#9ACD32', // Yellow Green
-  '#ADFF2F', // Green Yellow
+  '#2E8B57', // Darker Neon Green
+  '#FF6EB4', // Darker Neon Pink
+  '#00CDCD', // Darker Cyan
+  '#FF00FF', // Darker Neon Magenta
+  '#FF007F', // Darker Bright Pink
+  '#FFD700', // Darker Neon Yellow
+  '#00CED1', // Darker Neon Mint Green
+  '#FF1493', // Darker Neon Red
+  '#00CED1', // Darker Bright Aqua
+  '#FF7F50', // Darker Neon Coral
+  '#9ACD32', // Darker Neon Lime
+  '#FFA500', // Darker Neon Orange
+  '#32CD32', // Darker Neon Chartreuse
+  '#ADFF2F', // Darker Neon Yellow Green
+  '#DB7093', // Darker Neon Fuchsia
+  '#00FF7F', // Darker Spring Green
+  '#FFD700', // Darker Electric Lime
+  '#FF007F', // Darker Bright Magenta
+  '#FF6347', // Darker Neon Vermilion
 ];
 
 export function getUserColor(userId: string) {
