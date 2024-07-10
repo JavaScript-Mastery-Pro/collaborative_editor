@@ -5,6 +5,34 @@
 @import '@liveblocks/react-ui/styles.css';
 @import '@liveblocks/react-lexical/styles.css';
 
+/* ========================================== TAILWIND STYLES */
+@layer base {
+  :root {
+    background: #09111f;
+    color: #fff;
+    margin: 0;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+    border-radius: 50px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #09090a;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #2e3d5b;
+    border-radius: 50px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #7878a3;
+  }
+}
+
 @layer utilities {
   .gradient-blue {
     @apply bg-gradient-to-t from-blue-500 to-blue-400;
@@ -18,25 +46,6 @@
   .shad-select svg {
     @apply ml-1 mt-1;
   }
-}
-
-.custom-scrollbar::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
-  border-radius: 50px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: #09090a;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #2e3d5b;
-  border-radius: 50px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #7878a3;
 }
 
 /* ======================== Clerk Override */
@@ -145,7 +154,7 @@
   color: #b4c6ee;
 }
 
-data-liveblocks-portal {
+.data-liveblocks-portal {
   color: #b4c6ee !important;
 }
 
