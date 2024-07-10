@@ -24,7 +24,12 @@ export const getClerkUsers = async ({ userIds }: { userIds: string[] }) => {
       avatar: user.imageUrl,
     }));
 
-    return parseStringify(users);
+    // Sort users by the order of the userIds to make sure the order is consistent with userIds
+    const sortedUsers = userIds.map((email) =>
+      users.find((user) => user.email === email),
+    );
+
+    return parseStringify(sortedUsers);
   } catch (error) {
     console.error(
       'An error occurred while retrieving users from Clerk:',
