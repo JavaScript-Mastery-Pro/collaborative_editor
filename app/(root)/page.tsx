@@ -1,3 +1,4 @@
+import { SignedIn, UserButton } from '@clerk/nextjs';
 import { currentUser } from '@clerk/nextjs/server';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -9,6 +10,7 @@ import { dateConverter } from '@/lib/utils';
 import { CreateDocument } from '@/components/CreateDocument';
 import { DeleteModal } from '@/components/DeleteModal';
 import { Header } from '@/components/Header';
+import { Notifications } from '@/components/Notifications';
 
 const Documents = async () => {
   const clerkUser = await currentUser();
@@ -21,13 +23,20 @@ const Documents = async () => {
   return (
     <main className="flex min-h-screen w-full flex-col items-center gap-5 sm:gap-10">
       {/* Header */}
-      <Header />
+      <Header className="sticky left-0 top-0">
+        <div className="flex items-center gap-2 lg:gap-4">
+          <Notifications />
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
+        </div>
+      </Header>
 
       {/* Document list */}
       {roomDocuments.data.length > 0 ? (
-        <div className="mb-10 flex w-full flex-col items-center gap-10 px-4">
-          <div className="flex w-full max-w-[730px] items-end justify-between">
-            <h3 className="text-[28px] font-semibold">All documents</h3>
+        <div className="document-list-container flex flex-col items-center">
+          <div className="document-list-title">
+            <h3 className="text-28-semibold">All documents</h3>
             <CreateDocument
               userId={clerkUser.id}
               email={clerkUser.emailAddresses[0].emailAddress}
@@ -38,7 +47,7 @@ const Documents = async () => {
               return (
                 <li
                   key={document.id}
-                  className=" flex items-center justify-between gap-4 rounded-lg bg-doc bg-cover p-5 shadow-xl"
+                  className="document-list-item flex items-center justify-between "
                 >
                   <Link
                     href={`/documents/${document.id}`}
@@ -69,7 +78,7 @@ const Documents = async () => {
         </div>
       ) : (
         // Empty state
-        <div className="flex w-full max-w-[730px] flex-col items-center justify-center gap-5 rounded-lg bg-dark-200 px-10 py-8">
+        <div className="document-list-empty">
           <Image
             src="/assets/icons/doc.svg"
             alt="file"

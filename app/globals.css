@@ -36,11 +36,22 @@
 }
 
 @layer utilities {
+  .text-28-semibold {
+    @apply text-[28px] font-semibold;
+  }
+
   .gradient-blue {
     @apply bg-gradient-to-t from-blue-500 to-blue-400;
   }
   .gradient-red {
     @apply bg-gradient-to-t from-red-500 to-red-400;
+  }
+
+  .shad-dialog button {
+    @apply focus:ring-0 focus:ring-offset-0 focus-visible:border-none focus-visible:outline-none focus-visible:ring-transparent focus-visible:ring-offset-0 !important;
+  }
+  .shad-select svg {
+    @apply ml-1 mt-1;
   }
 
   .floating-toolbar {
@@ -51,19 +62,32 @@
     @apply relative inline-flex size-8 items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50;
   }
 
-  .shad-dialog button {
-    @apply focus:ring-0 focus:ring-offset-0 focus-visible:border-none focus-visible:outline-none focus-visible:ring-transparent focus-visible:ring-offset-0 !important;
-  }
-  .shad-select svg {
-    @apply ml-1 mt-1;
-  }
-
   .toolbar-wrapper {
     @apply z-50 custom-scrollbar w-screen overflow-auto border-y border-dark-300 bg-dark-100 pl-3 pr-4 shadow-sm;
   }
 
   .editor-wrapper {
     @apply custom-scrollbar h-[calc(100vh-140px)] gap-5 overflow-auto px-5 pt-5 lg:flex-row lg:items-start lg:justify-center  xl:gap-10 xl:pt-10;
+  }
+
+  .header {
+    @apply min-h-[92px] min-w-full flex-nowrap bg-dark-100;
+  }
+
+  .document-list-container {
+    @apply mb-10 w-full  gap-10 px-4;
+  }
+
+  .document-list-title {
+    @apply max-w-[730px] items-end flex w-full justify-between;
+  }
+
+  .document-list-item {
+    @apply gap-4 rounded-lg bg-doc bg-cover p-5 shadow-xl;
+  }
+
+  .document-list-empty {
+    @apply flex w-full max-w-[730px] flex-col items-center justify-center gap-5 rounded-lg bg-dark-200 px-10 py-8;
   }
 }
 

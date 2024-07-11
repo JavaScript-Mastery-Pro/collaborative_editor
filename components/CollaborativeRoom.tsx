@@ -3,12 +3,12 @@
 import { SignedIn, UserButton } from '@clerk/nextjs';
 import { RoomProvider, ClientSideSuspense } from '@liveblocks/react/suspense';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
 import { updateDocument } from '@/lib/actions/room.actions';
 
 import { Editor } from '@/components/Editor/Editor';
+import { Header } from '@/components/Header';
 import { Loader } from '@/components/Loader';
 
 import { ActiveCollaborators } from './ActiveCollaborators';
@@ -83,25 +83,7 @@ export function CollaborativeRoom({
       <ClientSideSuspense fallback={<Loader />}>
         <div className="flex size-full max-h-screen flex-1 flex-col items-center overflow-hidden">
           {/* Header */}
-          <div className="flex min-h-[92px] w-screen min-w-full flex-nowrap !items-center justify-between gap-2 px-4">
-            {/* Logo */}
-            <Link href="/" className="md:flex-1">
-              <Image
-                src="/assets/icons/logo.svg"
-                alt="file"
-                width={120}
-                height={32}
-                className="hidden md:block"
-              />
-              <Image
-                src="/assets/icons/logo-icon.svg"
-                alt="file"
-                width={32}
-                height={32}
-                className="mr-2 md:hidden"
-              />
-            </Link>
-
+          <Header>
             {/* Title */}
             <div
               ref={containerRef}
@@ -162,7 +144,7 @@ export function CollaborativeRoom({
                 <UserButton />
               </SignedIn>
             </div>
-          </div>
+          </Header>
 
           <Editor roomId={roomId} currentUserType={currentUserType} />
         </div>
