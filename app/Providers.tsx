@@ -22,7 +22,6 @@ export function Providers({ children }: { children: ReactNode }) {
         return users;
       }}
       resolveMentionSuggestions={async ({ text, roomId }) => {
-        // Users that has access to the document
         const roomUsers = await getDocumentUsers({
           roomId,
           currentUser: clerkUser?.emailAddresses[0].emailAddress!,

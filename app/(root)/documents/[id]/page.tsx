@@ -4,8 +4,7 @@ import { redirect } from 'next/navigation';
 import { getDocument } from '@/lib/actions/room.actions';
 import { getClerkUsers } from '@/lib/actions/user.actions';
 
-import { CollaborativeApp } from '@/components/CollaborativeApp';
-import { Room } from '@/components/Room';
+import { CollaborativeRoom } from '@/components/CollaborativeRoom';
 
 const Document = async ({ params: { id } }: SearchParamProps) => {
   const clerkUser = await currentUser();
@@ -21,6 +20,7 @@ const Document = async ({ params: { id } }: SearchParamProps) => {
   const userIds = Object.keys(room.usersAccesses);
 
   const users = await getClerkUsers({ userIds });
+
   const usersData = users.map((user: User) => ({
     ...user,
     userType: room.usersAccesses[user.email]?.includes('room:write')
@@ -36,14 +36,12 @@ const Document = async ({ params: { id } }: SearchParamProps) => {
 
   return (
     <main className="flex w-full flex-col items-center">
-      <Room roomId={id}>
-        <CollaborativeApp
-          roomId={id}
-          roomMetadata={room.metadata}
-          users={usersData}
-          currentUserType={currentUserType}
-        />
-      </Room>
+      <CollaborativeRoom
+        roomId={id}
+        roomMetadata={room.metadata}
+        users={usersData}
+        currentUserType={currentUserType}
+      />
     </main>
   );
 };

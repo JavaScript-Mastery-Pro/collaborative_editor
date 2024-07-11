@@ -1,5 +1,6 @@
 'use client';
 
+import { useSelf } from '@liveblocks/react/suspense';
 import Image from 'next/image';
 import { useState } from 'react';
 
@@ -32,7 +33,6 @@ type ShareDocumentDialogProps = {
   collaborators: User[];
   creatorId: string;
   currentUserType: UserType;
-  user: User;
 };
 
 export const ShareModal = ({
@@ -40,8 +40,9 @@ export const ShareModal = ({
   collaborators,
   creatorId,
   currentUserType,
-  user,
 }: ShareDocumentDialogProps) => {
+  const user = useSelf();
+
   const [email, setEmail] = useState('');
   const [userType, setUserType] = useState<UserType>('viewer');
   const [open, setOpen] = useState(false);
@@ -55,7 +56,7 @@ export const ShareModal = ({
         roomId,
         email,
         userType: userType as UserType,
-        updatedBy: user,
+        updatedBy: user.info,
       });
 
       if (room) setEmail('');
@@ -123,7 +124,7 @@ export const ShareModal = ({
                 creatorId={creatorId}
                 email={collaborator.email}
                 collaborator={collaborator}
-                user={user}
+                user={user.info}
               />
             ))}
           </ul>
