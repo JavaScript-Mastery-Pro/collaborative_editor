@@ -6,7 +6,7 @@ import './globals.css';
 
 import { cn } from '@/lib/utils';
 
-import { Providers } from './Providers';
+import { Provider } from './Provider';
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -38,7 +38,7 @@ export default function RootLayout({
             fontSans.variable,
           )}
         >
-          <Providers>{children}</Providers>
+          <Provider>{children}</Provider>
         </body>
       </html>
     </ClerkProvider>

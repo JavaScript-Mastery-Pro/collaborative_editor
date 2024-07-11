@@ -12,7 +12,8 @@ import {
   FloatingComposer,
   useEditorStatus,
 } from '@liveblocks/react-lexical';
-import Image from 'next/image';
+
+import { Loader } from '@/components/Loader';
 
 import FloatingToolbarPlugin from './plugins/FloatingToolbarPlugin';
 import ToolbarPlugin from './plugins/ToolbarPlugin';
@@ -47,28 +48,19 @@ export function Editor({
   return (
     <LexicalComposer initialConfig={initialConfig}>
       <div className="editor-container size-full">
-        <div className="custom-scrollbar z-50 flex w-screen min-w-full justify-between overflow-auto border-y border-dark-300 bg-dark-100 pl-3 pr-4 shadow-sm">
+        <div className="toolbar-wrapper flex min-w-full justify-between">
           <ToolbarPlugin />
           {currentUserType === 'editor' && <DeleteModal roomId={roomId} />}
         </div>
 
-        <div className="custom-scrollbar flex h-[calc(100vh-140px)] flex-col items-center justify-start gap-5 overflow-auto px-5 pt-5 lg:flex-row lg:items-start lg:justify-center  xl:gap-10 xl:pt-10">
+        <div className="editor-wrapper flex flex-col items-center justify-start">
           {status === 'not-loaded' || status === 'loading' ? (
-            <div className="flex size-full h-screen items-center justify-center gap-3 text-[#666666]">
-              <Image
-                src="/assets/icons/loader.svg"
-                alt="loader"
-                width={32}
-                height={32}
-                className="animate-spin"
-              />
-              Loading...
-            </div>
+            <Loader />
           ) : (
-            <div className="editor-inner relative mb-5 h-fit w-full max-w-[800px]  shadow-md lg:mb-20">
+            <div className="editor-inner relative mb-5 h-fit min-h-[1100px] w-full max-w-[800px] shadow-md lg:mb-10">
               <RichTextPlugin
                 contentEditable={
-                  <ContentEditable className="editor-input h-full" />
+                  <ContentEditable className="editor-input h-full " />
                 }
                 placeholder={<Placeholder />}
                 ErrorBoundary={LexicalErrorBoundary}

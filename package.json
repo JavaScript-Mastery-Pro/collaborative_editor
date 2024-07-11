@@ -29,6 +29,7 @@
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-tailwindcss": "^3.17.4",
+    "jsm-editor": "^0.0.5",
     "lexical": "^0.16.1",
     "lucide-react": "^0.400.0",
     "nanoid": "^5.0.7",

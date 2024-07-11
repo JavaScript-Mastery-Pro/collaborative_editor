@@ -11,7 +11,7 @@ import { getClerkUsers, getDocumentUsers } from '@/lib/actions/user.actions';
 
 import { Loader } from '@/components/Loader';
 
-export function Providers({ children }: { children: ReactNode }) {
+export function Provider({ children }: { children: ReactNode }) {
   const { user: clerkUser } = useUser();
 
   return (

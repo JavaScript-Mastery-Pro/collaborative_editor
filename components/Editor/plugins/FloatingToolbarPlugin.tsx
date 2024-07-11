@@ -108,7 +108,7 @@ function Toolbar({
         minWidth: 'max-content',
       }}
     >
-      <div className="flex w-full min-w-max items-center justify-center gap-2 rounded-lg bg-dark-350 p-1.5 shadow-xl">
+      <div className="floating-toolbar">
         <button
           onClick={() => {
             const isOpen = editor.dispatchCommand(
@@ -119,7 +119,7 @@ function Toolbar({
               onRangeChange(null);
             }
           }}
-          className="relative inline-flex size-8 items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50"
+          className="floating-toolbar-btn"
         >
           <Image
             src="/assets/icons/comment.svg"
