@@ -20,13 +20,7 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+import { UserTypeSelector } from '@/components/UserTypeSelector';
 
 type ShareDocumentDialogProps = {
   roomId: string;
@@ -71,7 +65,7 @@ export const ShareModal = ({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button
-          className="gradient-blue flex h-9 gap-1 px-4 hover:bg-[#3987cf]"
+          className="gradient-blue flex h-9 gap-1 px-4 "
           disabled={currentUserType !== 'editor'}
         >
           <Image
@@ -84,7 +78,7 @@ export const ShareModal = ({
           <p className="mr-1 hidden sm:block">Share</p>
         </Button>
       </DialogTrigger>
-      <DialogContent className="shad-dialog w-full max-w-[400px] rounded-xl border-none bg-doc bg-cover px-5 py-7 shadow-xl sm:min-w-[500px]">
+      <DialogContent className="shad-dialog">
         <DialogHeader>
           <DialogTitle>Manage who can view this project</DialogTitle>
           <DialogDescription>
@@ -101,7 +95,7 @@ export const ShareModal = ({
               id="email"
               placeholder="Enter email address"
               value={email}
-              className="h-11 flex-1 border-none bg-dark-400 focus-visible:ring-0 focus-visible:ring-offset-0"
+              className="share-input"
               onChange={(e) => setEmail(e.target.value)}
             />
             <UserTypeSelector userType={userType} setUserType={setUserType} />
@@ -109,7 +103,7 @@ export const ShareModal = ({
           <Button
             type="submit"
             onClick={shareDocumentHandler}
-            className="gradient-blue flex h-full gap-1 px-5 hover:bg-[#3987cf]"
+            className="gradient-blue flex h-full gap-1 px-5"
           >
             {loading ? 'Sending...' : 'Invite'}
           </Button>
@@ -183,7 +177,7 @@ const Collaborator = ({
           alt="avatar"
           width={36}
           height={36}
-          className="size-9 rounded-full border-[#2196f3] "
+          className="size-9 rounded-full"
         />
         <div>
           <p className="line-clamp-1 text-sm font-semibold leading-4 text-white">
@@ -210,52 +204,12 @@ const Collaborator = ({
           <Button
             type="button"
             onClick={() => removeCollaboratorHandler(collaborator.email)}
-            className="rounded-lg bg-transparent px-0 text-red-500 hover:bg-transparent"
+            className="remove-btn"
           >
             Remove
           </Button>
         </div>
       )}
     </li>
-  );
-};
-
-const UserTypeSelector = ({
-  userType,
-  setUserType,
-  onClickHandler,
-}: {
-  userType: string;
-  setUserType: React.Dispatch<React.SetStateAction<UserType>>;
-  onClickHandler?: (value: string) => void;
-}) => {
-  const accessChangeHandler = (type: UserType) => {
-    setUserType(type);
-    onClickHandler && onClickHandler(type);
-  };
-
-  return (
-    <Select
-      value={userType}
-      onValueChange={(type: UserType) => accessChangeHandler(type)}
-    >
-      <SelectTrigger className="shad-select w-fit border-none bg-transparent text-blue-100">
-        <SelectValue />
-      </SelectTrigger>
-      <SelectContent className="border-none bg-dark-200 ">
-        <SelectItem
-          value="viewer"
-          className="cursor-pointer bg-dark-200 text-blue-100 focus:bg-dark-300 focus:text-blue-100"
-        >
-          can view
-        </SelectItem>
-        <SelectItem
-          value="editor"
-          className="cursor-pointer bg-dark-200 text-blue-100 focus:bg-dark-300 focus:text-blue-100"
-        >
-          can edit
-        </SelectItem>
-      </SelectContent>
-    </Select>
   );
 };

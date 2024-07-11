@@ -47,11 +47,28 @@
     @apply bg-gradient-to-t from-red-500 to-red-400;
   }
 
+  .shad-dialog {
+    @apply w-full max-w-[400px] rounded-xl border-none bg-doc bg-cover px-5 py-7 shadow-xl sm:min-w-[500px] !important;
+  }
+
   .shad-dialog button {
     @apply focus:ring-0 focus:ring-offset-0 focus-visible:border-none focus-visible:outline-none focus-visible:ring-transparent focus-visible:ring-offset-0 !important;
   }
+
+  .shad-select {
+    @apply w-fit border-none bg-transparent text-blue-100 !important;
+  }
+
   .shad-select svg {
     @apply ml-1 mt-1;
+  }
+
+  .shad-select-item {
+    @apply cursor-pointer bg-dark-200 text-blue-100 focus:bg-dark-300 hover:bg-dark-300 focus:text-blue-100 !important;
+  }
+
+  .shad-popover {
+    @apply w-[460px] border-none bg-dark-200 shadow-lg !important;
   }
 
   .floating-toolbar {
@@ -75,7 +92,7 @@
   }
 
   .document-list-container {
-    @apply mb-10 w-full  gap-10 px-4;
+    @apply flex flex-col items-center mb-10 w-full  gap-10;
   }
 
   .document-list-title {
@@ -83,11 +100,47 @@
   }
 
   .document-list-item {
-    @apply gap-4 rounded-lg bg-doc bg-cover p-5 shadow-xl;
+    @apply flex items-center justify-between gap-4 rounded-lg bg-doc bg-cover p-5 shadow-xl;
   }
 
   .document-list-empty {
     @apply flex w-full max-w-[730px] flex-col items-center justify-center gap-5 rounded-lg bg-dark-200 px-10 py-8;
+  }
+
+  .document-title-input {
+    @apply min-w-[78px] border-none bg-transparent px-0 text-left text-base font-semibold leading-[24px] focus-visible:ring-0 focus-visible:ring-offset-0 disabled:text-black sm:text-xl md:text-center !important;
+  }
+
+  .document-title {
+    @apply line-clamp-1 border-dark-400 text-base font-semibold leading-[24px] sm:pl-0 sm:text-xl;
+  }
+
+  .view-only-tag {
+    @apply rounded-md bg-dark-400/50 px-2 py-0.5 text-xs text-blue-100/50;
+  }
+
+  .collaborators-list {
+    @apply hidden items-center justify-end -space-x-3 overflow-hidden sm:flex;
+  }
+
+  .share-input {
+    @apply h-11 flex-1 border-none bg-dark-400 focus-visible:ring-0 focus-visible:ring-offset-0 !important;
+  }
+
+  .remove-btn {
+    @apply rounded-lg bg-transparent px-0 text-red-500 hover:bg-transparent;
+  }
+
+  .comments-container {
+    @apply mb-10 space-y-4 lg:w-fit;
+  }
+
+  .comment-composer {
+    @apply w-full max-w-[800px] border border-dark-300 bg-dark-200 shadow-sm lg:w-[350px];
+  }
+
+  .comment-thread {
+    @apply w-full max-w-[800px] border border-dark-300 bg-dark-200 shadow-sm lg:w-[350px] transition-all;
   }
 }
 

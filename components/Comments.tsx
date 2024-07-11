@@ -9,8 +9,8 @@ export const Comments = () => {
   const { threads } = useThreads();
 
   return (
-    <div className="mb-10 flex w-full flex-col items-center justify-center space-y-4 lg:w-fit ">
-      <Composer className="w-full max-w-[800px] border border-dark-300 bg-dark-200 shadow-sm lg:w-[350px]" />
+    <div className="comments-container flex w-full flex-col items-center justify-center">
+      <Composer className="comment-composer" />
 
       {threads.map((thread) => (
         <ThreadWrapper key={thread.id} thread={thread} />
@@ -20,14 +20,14 @@ export const Comments = () => {
 };
 
 const ThreadWrapper = ({ thread }: { thread: ThreadData<BaseMetadata> }) => {
-  const isActive = useIsThreadActive(thread.id);
+  const isActive = useIsThreadActive(thread.id); // Text with attached comments will make the comment Thread active when clicked
 
   return (
     <Thread
       thread={thread}
       data-state={isActive ? 'active' : null}
       className={cn(
-        'w-full max-w-[800px] border border-dark-300 bg-dark-200 shadow-sm lg:w-[350px] transition-all',
+        'comment-thread',
         isActive && 'border-blue-500 shadow-md',
         thread.resolved && 'opacity-40',
       )}

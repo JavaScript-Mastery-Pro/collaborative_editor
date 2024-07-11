@@ -8,7 +8,7 @@ import { createDocument } from '@/lib/actions/room.actions';
 
 import { Button } from './ui/button';
 
-export const CreateDocument = ({
+export const AddDocumentBtn = ({
   userId,
   email,
 }: {
@@ -17,7 +17,7 @@ export const CreateDocument = ({
 }) => {
   const router = useRouter();
 
-  const createDocumentHandler = async () => {
+  const addDocumentHandler = async () => {
     try {
       const room = await createDocument({
         userId,
@@ -34,7 +34,7 @@ export const CreateDocument = ({
     <Button
       type="submit"
       className="gradient-blue flex gap-1 shadow-md"
-      onClick={createDocumentHandler}
+      onClick={addDocumentHandler}
     >
       <Image src="/assets/icons/add.svg" alt="add" width={24} height={24} />
       <p className="hidden sm:block">Start a blank document</p>

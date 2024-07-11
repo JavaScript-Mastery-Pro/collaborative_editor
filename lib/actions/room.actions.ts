@@ -28,6 +28,7 @@ export const createDocument = async ({
       [email]: ['room:write'],
     };
 
+    // https://liveblocks.io/docs/api-reference/liveblocks-node#post-rooms
     const room = await liveblocks.createRoom(roomId, {
       metadata,
       usersAccesses,
@@ -50,6 +51,7 @@ export const getDocument = async ({
   userId: string;
 }) => {
   try {
+    // https://liveblocks.io/docs/api-reference/liveblocks-node#get-rooms-roomId
     const room = await liveblocks.getRoom(roomId);
 
     // Check if the user has access to the document's room
@@ -68,6 +70,7 @@ export const getDocument = async ({
 // Get multiple documents filtered by users accesses
 export const getDocuments = async (email: string) => {
   try {
+    // https://liveblocks.io/docs/api-reference/liveblocks-node#get-rooms
     const rooms = await liveblocks.getRooms({ userId: email });
 
     return parseStringify(rooms);
@@ -79,6 +82,7 @@ export const getDocuments = async (email: string) => {
 // Update document title
 export const updateDocument = async (roomId: string, title: string) => {
   try {
+    // https://liveblocks.io/docs/api-reference/liveblocks-node#post-rooms-roomId
     const room = await liveblocks.updateRoom(roomId, {
       metadata: {
         title,
@@ -98,6 +102,7 @@ export const updateDocument = async (roomId: string, title: string) => {
 // Delete one document
 export const deleteDocument = async (roomId: string) => {
   try {
+    // https://liveblocks.io/docs/api-reference/liveblocks-node#delete-rooms-roomId
     liveblocks.deleteRoom(roomId);
   } catch (error) {
     console.error('An error occurred while deleting a room:', error);
@@ -119,6 +124,7 @@ export const updateDocumentAccess = async ({
       [email]: getAccessType(userType) as AccessType,
     };
 
+    // https://liveblocks.io/docs/authentication/id-token#permission-types
     const room = await liveblocks.updateRoom(roomId, {
       usersAccesses,
     });
@@ -126,17 +132,11 @@ export const updateDocumentAccess = async ({
     if (room) {
       const notificationId = nanoid();
 
+      // https://liveblocks.io/docs/api-reference/liveblocks-node#post-inbox-notifications-trigger
       await liveblocks.triggerInboxNotification({
-        // The ID of the user that will receive the inbox notification
         userId: email,
-
-        // The custom notification kind, must start with a $
         kind: '$documentAccess',
-
-        // Custom ID for this specific notification
         subjectId: notificationId,
-
-        // Custom data related to the activity that you need to render the inbox notification
         activityData: {
           userType,
           title: `${updatedBy.name} shared a document with you.`,
@@ -144,8 +144,6 @@ export const updateDocumentAccess = async ({
           avatar: updatedBy.avatar,
           email: updatedBy.email,
         },
-
-        // Optional, define the room ID the notification was sent from
         roomId,
       });
     }

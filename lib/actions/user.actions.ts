@@ -13,6 +13,7 @@ const clerkClient = createClerkClient({
 // Get Clerk Users
 export const getClerkUsers = async ({ userIds }: { userIds: string[] }) => {
   try {
+    // https://clerk.com/docs/references/backend/user/get-user-list#filter-by-email-addresses-and-phone-numbers
     const { data } = await clerkClient.users.getUserList({
       emailAddress: userIds,
     });

@@ -7,7 +7,7 @@ import { redirect } from 'next/navigation';
 import { getDocuments } from '@/lib/actions/room.actions';
 import { dateConverter } from '@/lib/utils';
 
-import { CreateDocument } from '@/components/CreateDocument';
+import { AddDocumentBtn } from '@/components/AddDocumentBtn ';
 import { DeleteModal } from '@/components/DeleteModal';
 import { Header } from '@/components/Header';
 import { Notifications } from '@/components/Notifications';
@@ -21,7 +21,7 @@ const Documents = async () => {
   );
 
   return (
-    <main className="flex min-h-screen w-full flex-col items-center gap-5 sm:gap-10">
+    <main className="relative flex min-h-screen w-full flex-col items-center gap-5 sm:gap-10">
       {/* Header */}
       <Header className="sticky left-0 top-0">
         <div className="flex items-center gap-2 lg:gap-4">
@@ -34,10 +34,10 @@ const Documents = async () => {
 
       {/* Document list */}
       {roomDocuments.data.length > 0 ? (
-        <div className="document-list-container flex flex-col items-center">
+        <div className="document-list-container">
           <div className="document-list-title">
             <h3 className="text-28-semibold">All documents</h3>
-            <CreateDocument
+            <AddDocumentBtn
               userId={clerkUser.id}
               email={clerkUser.emailAddresses[0].emailAddress}
             />
@@ -45,10 +45,7 @@ const Documents = async () => {
           <ul className="flex w-full max-w-[730px] flex-col gap-5">
             {roomDocuments.data.map((document: any) => {
               return (
-                <li
-                  key={document.id}
-                  className="document-list-item flex items-center justify-between "
-                >
+                <li key={document.id} className="document-list-item">
                   <Link
                     href={`/documents/${document.id}`}
                     className="flex flex-1 items-center gap-4"
@@ -87,7 +84,7 @@ const Documents = async () => {
             className="mx-auto"
           />
 
-          <CreateDocument
+          <AddDocumentBtn
             userId={clerkUser.id}
             email={clerkUser.emailAddresses[0].emailAddress}
           />

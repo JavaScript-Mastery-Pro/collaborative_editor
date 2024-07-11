@@ -82,9 +82,8 @@ export function CollaborativeRoom({
     <RoomProvider id={roomId}>
       <ClientSideSuspense fallback={<Loader />}>
         <div className="flex size-full max-h-screen flex-1 flex-col items-center overflow-hidden">
-          {/* Header */}
           <Header>
-            {/* Title */}
+            {/* Title text & Input field */}
             <div
               ref={containerRef}
               className="flex w-fit items-center justify-center gap-2"
@@ -98,17 +97,15 @@ export function CollaborativeRoom({
                   onChange={(e) => setDocumentTitle(e.target.value)}
                   onKeyDown={(e) => updateTitleHandler(e)}
                   disabled={!editing}
-                  className="xs:max-w-full min-w-[78px] border-none bg-transparent px-0 text-left text-base font-semibold leading-[24px] focus-visible:ring-0 focus-visible:ring-offset-0 disabled:text-black sm:text-xl md:text-center"
+                  className="document-title-input"
                 />
               ) : (
                 <>
-                  <p className="line-clamp-1 border-dark-400 text-base font-semibold leading-[24px] sm:pl-0 sm:text-xl">
-                    {documentTitle}
-                  </p>
+                  <p className="document-title">{documentTitle}</p>
                 </>
               )}
 
-              {/* Edit title icon */}
+              {/* Edit icon trigger */}
               {currentUserType === 'editor' && !editing && (
                 <Image
                   src="/assets/icons/edit.svg"
@@ -122,9 +119,7 @@ export function CollaborativeRoom({
 
               {/* View only user indicator */}
               {currentUserType !== 'editor' && !editing && (
-                <p className="rounded-md bg-dark-400/50 px-2 py-0.5 text-[12px] text-blue-100/50">
-                  View only
-                </p>
+                <p className="view-only-tag">View only</p>
               )}
 
               {/* Saving title indicator */}
