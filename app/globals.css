@@ -39,6 +39,9 @@
   .text-28-semibold {
     @apply text-[28px] font-semibold;
   }
+  .text-10-regular {
+    @apply text-[10px] font-normal;
+  }
 
   .gradient-blue {
     @apply bg-gradient-to-t from-blue-500 to-blue-400;

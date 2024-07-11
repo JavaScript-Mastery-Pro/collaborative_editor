@@ -182,7 +182,7 @@ const Collaborator = ({
         <div>
           <p className="line-clamp-1 text-sm font-semibold leading-4 text-white">
             {collaborator.name}
-            <span className="pl-2 text-[10px] text-blue-100">
+            <span className="text-10-regular pl-2 text-blue-100">
               {loading && 'updating...'}
             </span>
           </p>
