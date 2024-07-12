@@ -6,11 +6,13 @@ import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
+import { useThreads } from '@liveblocks/react/suspense';
 import {
   liveblocksConfig,
   LiveblocksPlugin,
   FloatingComposer,
   useEditorStatus,
+  FloatingThreads,
 } from '@liveblocks/react-lexical';
 
 import { Loader } from '@/components/Loader';
@@ -33,6 +35,7 @@ export function Editor({
   currentUserType: UserType;
 }) {
   const status = useEditorStatus();
+  const { threads } = useThreads();
 
   const initialConfig = liveblocksConfig({
     namespace: 'Editor',
@@ -44,6 +47,8 @@ export function Editor({
     theme: Theme,
     editable: currentUserType === 'editor',
   });
+
+  console.log({ threads });
 
   return (
     <LexicalComposer initialConfig={initialConfig}>
@@ -74,6 +79,7 @@ export function Editor({
           <LiveblocksPlugin>
             <FloatingComposer className="w-[350px]" />
             <Comments />
+            <FloatingThreads threads={threads} className="top-20 block" />
           </LiveblocksPlugin>
         </div>
       </div>

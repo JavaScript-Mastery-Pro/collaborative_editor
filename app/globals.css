@@ -183,13 +183,14 @@
 
 /* ======================== Liveblocks Override */
 .lb-root {
-  --lb-accent-subtle: #0f1c34;
+  --lb-accent-subtle: #0b1527;
+  --lb-radius: 0px;
 }
 
 .lb-comment,
 .lb-root,
 .lb-comment-reaction {
-  background-color: #0b1526;
+  background-color: #0f1c34;
   color: #fff;
 }
 
@@ -233,7 +234,8 @@
 
 .lb-comment-body,
 .lb-dropdown-item,
-.lb-dropdown-item-icon {
+.lb-dropdown-item-icon,
+.lb-composer-editor {
   color: #fff;
 }
 
@@ -242,7 +244,7 @@
 }
 
 .lb-comment-content {
-  background: #0f1c34;
+  background: #0b1527;
   margin-top: 16px;
   padding: 12px;
   border-radius: 4px;
@@ -271,10 +273,10 @@
   font-size: 14px;
 }
 
-.lb-composer-editor {
-  color: #fff;
+.lb-lexical-floating-threads-thread:where([data-resolved]) {
+  opacity: 40%;
 }
 
-.lb-thread :where([data-state='active']) {
-  background: #690 !important;
+.lb-portal {
+  background-color: transparent;
 }
