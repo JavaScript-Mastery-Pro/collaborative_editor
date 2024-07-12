@@ -185,10 +185,12 @@
 .lb-root {
   --lb-accent-subtle: #0b1527;
   --lb-radius: 0px;
+  --lb-dynamic-background: #1b2840;
 }
 
 .lb-comment,
-.lb-root,
+.lb-thread-comments,
+.lb-composer,
 .lb-comment-reaction {
   background-color: #0f1c34;
   color: #fff;
@@ -277,6 +279,6 @@
   opacity: 40%;
 }
 
-.lb-portal {
-  background-color: transparent;
+.lb-elevation {
+  background: #0f1c34;
 }
