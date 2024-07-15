@@ -21,8 +21,7 @@ const Documents = async () => {
   );
 
   return (
-    <main className="relative flex min-h-screen w-full flex-col items-center gap-5 sm:gap-10">
-      {/* Header */}
+    <main className="home-container">
       <Header className="sticky left-0 top-0">
         <div className="flex items-center gap-2 lg:gap-4">
           <Notifications />
@@ -42,7 +41,7 @@ const Documents = async () => {
               email={clerkUser.emailAddresses[0].emailAddress}
             />
           </div>
-          <ul className="flex w-full max-w-[730px] flex-col gap-5">
+          <ul className="document-ul">
             {roomDocuments.data.map((document: any) => (
               <li key={document.id} className="document-list-item">
                 <Link

@@ -8,7 +8,7 @@ export const Comments = () => {
   const { threads } = useThreads();
 
   return (
-    <div className="comments-container flex w-full flex-col items-center justify-center">
+    <div className="comments-container">
       <Composer className="comment-composer" />
 
       {threads.map((thread) => (

@@ -2,10 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-@import '@liveblocks/react-ui/styles.css';
-@import '@liveblocks/react-lexical/styles.css';
+@import "@liveblocks/react-ui/styles.css";
+@import "@liveblocks/react-lexical/styles.css";
 
-@import '../styles/dark-theme.css';
+@import "../styles/dark-theme.css";
 
 /* ========================================== TAILWIND STYLES */
 @layer base {
@@ -91,11 +91,11 @@
   }
 
   .header {
-    @apply min-h-[92px] min-w-full flex-nowrap bg-dark-100;
+    @apply min-h-[92px] min-w-full flex-nowrap bg-dark-100 flex w-full items-center justify-between gap-2 px-4;
   }
 
   .document-list-container {
-    @apply flex flex-col items-center mb-10 w-full  gap-10;
+    @apply flex flex-col items-center mb-10 w-full gap-10 px-5;
   }
 
   .document-list-title {
@@ -135,7 +135,7 @@
   }
 
   .comments-container {
-    @apply mb-10 space-y-4 lg:w-fit;
+    @apply mb-10 space-y-4 lg:w-fit flex w-full flex-col items-center justify-center;
   }
 
   .comment-composer {
@@ -144,6 +144,29 @@
 
   .comment-thread {
     @apply w-full max-w-[800px] border border-dark-300 bg-dark-200 shadow-sm lg:w-[350px] transition-all;
+  }
+
+  .loader {
+    @apply flex size-full h-screen items-center justify-center gap-3 text-white;
+  }
+
+  /* ======================== Auth Pages */
+  .auth-page {
+    @apply flex h-screen w-full flex-col items-center justify-center gap-10;
+  }
+
+  /* ======================== Home Page */
+  .home-container {
+    @apply relative flex min-h-screen w-full flex-col items-center gap-5 sm:gap-10;
+  }
+
+  .document-ul {
+    @apply flex w-full max-w-[730px] flex-col gap-5;
+  }
+
+  /* ======================== CollaborativeRoom */
+  .collaborative-room {
+    @apply flex size-full max-h-screen flex-1 flex-col items-center overflow-hidden;
   }
 }
 
@@ -200,19 +223,19 @@
   --lb-foreground-moderate: #fff;
 }
 
-.lb-button:where([data-variant='primary']) {
+.lb-button:where([data-variant="primary"]) {
   background-color: #161e30;
   color: #b4c6ee;
   padding: 8px;
 }
 
 .lb-button:where(
-    [data-variant='default']:not(
+    [data-variant="default"]:not(
         :is(
             :enabled:hover,
             :enabled:focus-visible,
-            [aria-expanded='true'],
-            [aria-selected='true']
+            [aria-expanded="true"],
+            [aria-selected="true"]
           )
       )
   ) {
@@ -222,8 +245,8 @@
 .lb-button:where(
     :enabled:hover,
     :enabled:focus-visible,
-    [aria-expanded='true'],
-    [aria-selected='true']
+    [aria-expanded="true"],
+    [aria-selected="true"]
   ) {
   --lb-button-background: #161e30;
 
