@@ -1,20 +1,14 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import React from 'react';
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import React from "react";
 
-import { createDocument } from '@/lib/actions/room.actions';
+import { createDocument } from "@/lib/actions/room.actions";
 
-import { Button } from './ui/button';
+import { Button } from "./ui/button";
 
-export const AddDocumentBtn = ({
-  userId,
-  email,
-}: {
-  userId: string;
-  email: string;
-}) => {
+export const AddDocumentBtn = ({ userId, email }: AddDocumentBtnProps) => {
   const router = useRouter();
 
   const addDocumentHandler = async () => {
@@ -26,7 +20,7 @@ export const AddDocumentBtn = ({
 
       if (room) router.push(`/documents/${room.id}`);
     } catch (error) {
-      console.log('Error notif:', error);
+      console.log("Error notif:", error);
     }
   };
 

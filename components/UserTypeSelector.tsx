@@ -4,17 +4,13 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from "@/components/ui/select";
 
 export const UserTypeSelector = ({
   userType,
   setUserType,
   onClickHandler,
-}: {
-  userType: string;
-  setUserType: React.Dispatch<React.SetStateAction<UserType>>;
-  onClickHandler?: (value: string) => void;
-}) => {
+}: UserTypeSelectorParams) => {
   const accessChangeHandler = (type: UserType) => {
     setUserType(type);
     onClickHandler && onClickHandler(type);

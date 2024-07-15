@@ -1,29 +1,29 @@
-'use client';
+"use client";
 
 import {
   useInboxNotifications,
   useUnreadInboxNotificationsCount,
-} from '@liveblocks/react/suspense';
+} from "@liveblocks/react/suspense";
 import {
   InboxNotification,
   InboxNotificationList,
   LiveblocksUIConfig,
-} from '@liveblocks/react-ui';
-import Image from 'next/image';
-import { ReactNode } from 'react';
+} from "@liveblocks/react-ui";
+import Image from "next/image";
+import { ReactNode } from "react";
 
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
+} from "@/components/ui/popover";
 
 export const Notifications = () => {
   const { inboxNotifications } = useInboxNotifications();
   const { count } = useUnreadInboxNotificationsCount();
 
   const unreadNotifications = inboxNotifications.filter(
-    (notification) => !notification.readAt, // Filter unread notifications
+    (notification) => !notification.readAt // Filter unread notifications
   );
 
   return (
@@ -89,7 +89,7 @@ export const Notifications = () => {
                           aside={
                             <InboxNotification.Icon className="bg-transparent">
                               <Image
-                                src={(avatar as string) || ''}
+                                src={(avatar as string) || ""}
                                 width={36}
                                 height={36}
                                 alt="avatar"

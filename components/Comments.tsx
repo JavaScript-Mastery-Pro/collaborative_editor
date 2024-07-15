@@ -1,4 +1,3 @@
-import { BaseMetadata, ThreadData } from '@liveblocks/client';
 import { useThreads } from '@liveblocks/react/suspense';
 import { useIsThreadActive } from '@liveblocks/react-lexical';
 import { Thread, Composer } from '@liveblocks/react-ui';
@@ -19,7 +18,7 @@ export const Comments = () => {
   );
 };
 
-const ThreadWrapper = ({ thread }: { thread: ThreadData<BaseMetadata> }) => {
+const ThreadWrapper = ({ thread }: ThreadWrapperProps) => {
   const isActive = useIsThreadActive(thread.id); // Text with attached comments will make the comment Thread active when clicked
 
   return (

@@ -1,20 +1,14 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from "next/image";
+import Link from "next/link";
 
-import { cn } from '@/lib/utils';
+import { cn } from "@/lib/utils";
 
-export const Header = ({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => {
+export const Header = ({ children, className }: HeaderProps) => {
   return (
     <div
       className={cn(
-        'header flex w-full items-center justify-between gap-2 px-4',
-        className,
+        "header flex w-full items-center justify-between gap-2 px-4",
+        className
       )}
     >
       <Link href="/" className="md:flex-1">
