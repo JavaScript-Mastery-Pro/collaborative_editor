@@ -75,7 +75,7 @@ export function CollaborativeRoom({
   return (
     <RoomProvider id={roomId}>
       <ClientSideSuspense fallback={<Loader />}>
-        <div className="flex size-full max-h-screen flex-1 flex-col items-center overflow-hidden">
+        <div className="collaborative-room">
           <Header>
             {/* Title text & Input field */}
             <div

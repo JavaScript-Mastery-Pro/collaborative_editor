@@ -1,8 +1,8 @@
-import Image from 'next/image';
+import Image from "next/image";
 
 export const Loader = () => {
   return (
-    <div className="flex size-full h-screen items-center justify-center gap-3 text-white">
+    <div className="loader">
       <Image
         src="/assets/icons/loader.svg"
         alt="loader"

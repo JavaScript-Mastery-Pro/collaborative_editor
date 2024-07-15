@@ -56,7 +56,7 @@ export const ShareModal = ({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button
-          className="gradient-blue flex h-9 gap-1 px-4 "
+          className="gradient-blue flex h-9 gap-1 px-4"
           disabled={currentUserType !== "editor"}
         >
           <Image

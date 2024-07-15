@@ -5,12 +5,7 @@ import { cn } from "@/lib/utils";
 
 export const Header = ({ children, className }: HeaderProps) => {
   return (
-    <div
-      className={cn(
-        "header flex w-full items-center justify-between gap-2 px-4",
-        className
-      )}
-    >
+    <div className={cn("header", className)}>
       <Link href="/" className="md:flex-1">
         <Image
           src="/assets/icons/logo.svg"
