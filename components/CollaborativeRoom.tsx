@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import { SignedIn, UserButton } from "@clerk/nextjs";
-import { RoomProvider, ClientSideSuspense } from "@liveblocks/react/suspense";
-import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { SignedIn, UserButton } from '@clerk/nextjs';
+import { RoomProvider, ClientSideSuspense } from '@liveblocks/react/suspense';
+import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
 
-import { updateDocument } from "@/lib/actions/room.actions";
+import { updateDocument } from '@/lib/actions/room.actions';
 
-import { Editor } from "@/components/editor/Editor";
-import { Header } from "@/components/Header";
-import { Loader } from "@/components/Loader";
+import { Editor } from '@/components/editor/Editor';
+import { Header } from '@/components/Header';
+import { Loader } from '@/components/Loader';
 
-import { ActiveCollaborators } from "./ActiveCollaborators";
-import { ShareModal } from "./ShareModal";
-import { Input } from "./ui/input";
+import { ActiveCollaborators } from './ActiveCollaborators';
+import { ShareModal } from './ShareModal';
+import { Input } from './ui/input';
 
 export function CollaborativeRoom({
   roomId,
@@ -29,9 +29,9 @@ export function CollaborativeRoom({
   const inputRef = useRef<HTMLInputElement>(null);
 
   const updateTitleHandler = async (
-    e: React.KeyboardEvent<HTMLInputElement>
+    e: React.KeyboardEvent<HTMLInputElement>,
   ) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       setLoading(true);
 
       try {
@@ -43,7 +43,7 @@ export function CollaborativeRoom({
           }
         }
       } catch (error) {
-        console.log("Error notif:", error);
+        console.log('Error notif:', error);
       }
 
       setLoading(false);
@@ -60,9 +60,9 @@ export function CollaborativeRoom({
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
@@ -100,7 +100,7 @@ export function CollaborativeRoom({
               )}
 
               {/* Edit icon trigger */}
-              {currentUserType === "editor" && !editing && (
+              {currentUserType === 'editor' && !editing && (
                 <Image
                   src="/assets/icons/edit.svg"
                   alt="edit"
@@ -112,7 +112,7 @@ export function CollaborativeRoom({
               )}
 
               {/* View only user indicator */}
-              {currentUserType !== "editor" && !editing && (
+              {currentUserType !== 'editor' && !editing && (
                 <p className="view-only-tag">View only</p>
               )}
 
