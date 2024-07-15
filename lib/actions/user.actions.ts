@@ -39,7 +39,7 @@ export const getClerkUsers = async ({ userIds }: { userIds: string[] }) => {
   }
 };
 
-// Get one document
+// Get document users
 export const getDocumentUsers = async ({
   roomId,
   currentUser,

@@ -21,7 +21,7 @@ export const Comments = () => {
 
 const ThreadWrapper = ({ thread }: { thread: ThreadData<BaseMetadata> }) => {
   const isActive = useIsThreadActive(thread.id); // Text with attached comments will make the comment Thread active when clicked
-  console.log({ isActive });
+
   return (
     <Thread
       thread={thread}
