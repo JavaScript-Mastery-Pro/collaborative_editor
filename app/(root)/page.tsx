@@ -1,23 +1,23 @@
-import { SignedIn, UserButton } from '@clerk/nextjs';
-import { currentUser } from '@clerk/nextjs/server';
-import Image from 'next/image';
-import Link from 'next/link';
-import { redirect } from 'next/navigation';
+import { SignedIn, UserButton } from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs/server";
+import Image from "next/image";
+import Link from "next/link";
+import { redirect } from "next/navigation";
 
-import { getDocuments } from '@/lib/actions/room.actions';
-import { dateConverter } from '@/lib/utils';
+import { getDocuments } from "@/lib/actions/room.actions";
+import { dateConverter } from "@/lib/utils";
 
-import { AddDocumentBtn } from '@/components/AddDocumentBtn ';
-import { DeleteModal } from '@/components/DeleteModal';
-import { Header } from '@/components/Header';
-import { Notifications } from '@/components/Notifications';
+import { AddDocumentBtn } from "@/components/AddDocumentBtn ";
+import { DeleteModal } from "@/components/DeleteModal";
+import { Header } from "@/components/Header";
+import { Notifications } from "@/components/Notifications";
 
 const Documents = async () => {
   const clerkUser = await currentUser();
-  if (!clerkUser) redirect('/sign-in');
+  if (!clerkUser) redirect("/sign-in");
 
   const roomDocuments = await getDocuments(
-    clerkUser.emailAddresses[0].emailAddress,
+    clerkUser.emailAddresses[0].emailAddress
   );
 
   return (
@@ -43,34 +43,32 @@ const Documents = async () => {
             />
           </div>
           <ul className="flex w-full max-w-[730px] flex-col gap-5">
-            {roomDocuments.data.map((document: any) => {
-              return (
-                <li key={document.id} className="document-list-item">
-                  <Link
-                    href={`/documents/${document.id}`}
-                    className="flex flex-1 items-center gap-4"
-                  >
-                    <div className="hidden rounded-md bg-dark-500 p-2 sm:block">
-                      <Image
-                        src="/assets/icons/doc.svg"
-                        alt="file"
-                        width={40}
-                        height={40}
-                      />
-                    </div>
-                    <div className="space-y-1">
-                      <p className="line-clamp-1 text-lg">
-                        {document.metadata.title}
-                      </p>
-                      <p className="text-sm font-light text-blue-100">
-                        Created about {dateConverter(document.createdAt)}
-                      </p>
-                    </div>
-                  </Link>
-                  <DeleteModal roomId={document.id} />
-                </li>
-              );
-            })}
+            {roomDocuments.data.map((document: any) => (
+              <li key={document.id} className="document-list-item">
+                <Link
+                  href={`/documents/${document.id}`}
+                  className="flex flex-1 items-center gap-4"
+                >
+                  <div className="hidden rounded-md bg-dark-500 p-2 sm:block">
+                    <Image
+                      src="/assets/icons/doc.svg"
+                      alt="file"
+                      width={40}
+                      height={40}
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <p className="line-clamp-1 text-lg">
+                      {document.metadata.title}
+                    </p>
+                    <p className="text-sm font-light text-blue-100">
+                      Created about {dateConverter(document.createdAt)}
+                    </p>
+                  </div>
+                </Link>
+                <DeleteModal roomId={document.id} />
+              </li>
+            ))}
           </ul>
         </div>
       ) : (

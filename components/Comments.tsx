@@ -1,9 +1,8 @@
-import { BaseMetadata, ThreadData } from '@liveblocks/client';
-import { useThreads } from '@liveblocks/react/suspense';
-import { useIsThreadActive } from '@liveblocks/react-lexical';
-import { Thread, Composer } from '@liveblocks/react-ui';
+import { useThreads } from "@liveblocks/react/suspense";
+import { useIsThreadActive } from "@liveblocks/react-lexical";
+import { Thread, Composer } from "@liveblocks/react-ui";
 
-import { cn } from '@/lib/utils';
+import { cn } from "@/lib/utils";
 
 export const Comments = () => {
   const { threads } = useThreads();
@@ -19,17 +18,16 @@ export const Comments = () => {
   );
 };
 
-const ThreadWrapper = ({ thread }: { thread: ThreadData<BaseMetadata> }) => {
+const ThreadWrapper = ({ thread }: ThreadWrapperProps) => {
   const isActive = useIsThreadActive(thread.id); // Text with attached comments will make the comment Thread active when clicked
-  console.log({ isActive });
   return (
     <Thread
       thread={thread}
-      data-state={isActive ? 'active' : null}
+      data-state={isActive ? "active" : null}
       className={cn(
-        'comment-thread border',
-        isActive && '!border-blue-500 shadow-md',
-        thread.resolved && 'opacity-40',
+        "comment-thread border",
+        isActive && "!border-blue-500 shadow-md",
+        thread.resolved && "opacity-40"
       )}
     />
   );

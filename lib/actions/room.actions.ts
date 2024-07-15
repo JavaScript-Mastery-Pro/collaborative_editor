@@ -103,7 +103,7 @@ export const updateDocument = async (roomId: string, title: string) => {
 export const deleteDocument = async (roomId: string) => {
   try {
     // https://liveblocks.io/docs/api-reference/liveblocks-node#delete-rooms-roomId
-    liveblocks.deleteRoom(roomId);
+    await liveblocks.deleteRoom(roomId);
   } catch (error) {
     console.error('An error occurred while deleting a room:', error);
   } finally {

@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { useState } from 'react';
+import Image from "next/image";
+import { useState } from "react";
 
-import { deleteDocument } from '@/lib/actions/room.actions';
+import { deleteDocument } from "@/lib/actions/room.actions";
 
 import {
   Dialog,
@@ -14,11 +14,11 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
+} from "@/components/ui/dialog";
 
-import { Button } from './ui/button';
+import { Button } from "./ui/button";
 
-export const DeleteModal = ({ roomId }: { roomId: string }) => {
+export const DeleteModal = ({ roomId }: DeleteModalProps) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -29,7 +29,7 @@ export const DeleteModal = ({ roomId }: { roomId: string }) => {
       await deleteDocument(roomId);
       setOpen(false);
     } catch (error) {
-      console.log('Error notif:', error);
+      console.log("Error notif:", error);
     }
 
     setLoading(false);
@@ -74,7 +74,7 @@ export const DeleteModal = ({ roomId }: { roomId: string }) => {
             onClick={deleteDocumentHandler}
             className="gradient-red w-full"
           >
-            {loading ? 'Deleting...' : 'Delete'}
+            {loading ? "Deleting..." : "Delete"}
           </Button>
         </DialogFooter>
       </DialogContent>
