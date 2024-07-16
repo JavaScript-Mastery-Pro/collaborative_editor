@@ -280,7 +280,10 @@
 .lb-lexical-mention-suggestion-user,
 .lb-composer-suggestions-list-item,
 .lb-inbox-notification-date,
-.lb-comment-author {
+.lb-comment-author,
+.lb-emoji-picker-search-icon,
+.lb-emoji-picker-category-header-title,
+.lb-emoji-picker-search::placeholder {
   color: #b4c6ee;
 }
 
