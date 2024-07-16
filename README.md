@@ -986,7 +986,7 @@ export function createDOMRange(
 
 ## <a name="links">🔗 Assets</a>
 
-Public assets used in the project can be found [here](https://drive.google.com/file/d/1eWl99G6Dhw-56l__YhgETVYjQvE58wp2/view?usp=sharing)
+Public assets used in the project can be found [here](https://drive.google.com/file/d/1MCQaP-imgDdopwcUn4CN_D-WglDc--Ho/view?usp=sharing)
 
 ## <a name="more">🚀 More</a>
 
