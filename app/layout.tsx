@@ -14,7 +14,7 @@ const fontSans = FontSans({
 });
 
 export const metadata: Metadata = {
-  title: 'JSM Docs',
+  title: 'LiveDocs',
   description:
     'A collaborative text editor that leverages Liveblocks and Lexical to offer a real-time, feature-rich platform for creating, editing, and sharing documents.',
 };
