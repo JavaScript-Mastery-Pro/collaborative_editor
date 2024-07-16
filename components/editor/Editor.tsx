@@ -49,8 +49,6 @@ export function Editor({
     editable: currentUserType === 'editor',
   });
 
-  console.log({ threads });
-
   return (
     <LexicalComposer initialConfig={initialConfig}>
       <div className="editor-container size-full">
