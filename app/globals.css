@@ -293,7 +293,7 @@
   color: #fff;
 }
 
-.lb-composer-editor:where([data-placeholder]) {
+.lb-composer-editor :where([data-placeholder]) {
   color: #b4c6ee;
   font-size: 14px;
 }
