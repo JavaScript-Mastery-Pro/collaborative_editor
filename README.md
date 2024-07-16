@@ -131,6 +131,45 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to view the 
 ## <a name="snippets">🕸️ Snippets</a>
 
 <details>
+<summary><code>.eslintrc.json</code></summary>
+
+```json
+{
+  "plugins": ["import"],
+  "extends": [
+    "next/core-web-vitals",
+    "standard",
+    "plugin:tailwindcss/recommended",
+    "prettier"
+  ],
+  "rules": {
+    "no-undef": "off",
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "internal"],
+        "pathGroups": [
+          {
+            "pattern": "@/components/**",
+            "group": "internal",
+            "position": "after"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["builtin"],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ]
+  }
+}
+```
+
+</details>
+
+<details>
 <summary><code>tailwind.config.ts</code></summary>
 
 ```typescript
@@ -523,11 +562,6 @@ export default config;
 </details>
 
 <details>
-<summary><code></code></summary>
-
-</details>
-
-<details>
 <summary><code>types/index.d.ts</code></summary>
 
 ```typescript
@@ -714,45 +748,6 @@ export function getUserColor(userId: string) {
 
   const colorIndex = sum % brightColors.length;
   return brightColors[colorIndex];
-}
-```
-
-</details>
-
-<details>
-<summary><code>.eslintrc.json</code></summary>
-
-```json
-{
-  "plugins": ["import"],
-  "extends": [
-    "next/core-web-vitals",
-    "standard",
-    "plugin:tailwindcss/recommended",
-    "prettier"
-  ],
-  "rules": {
-    "no-undef": "off",
-    "import/order": [
-      "error",
-      {
-        "groups": ["builtin", "external", "internal"],
-        "pathGroups": [
-          {
-            "pattern": "@/components/**",
-            "group": "internal",
-            "position": "after"
-          }
-        ],
-        "pathGroupsExcludedImportTypes": ["builtin"],
-        "newlines-between": "always",
-        "alphabetize": {
-          "order": "asc",
-          "caseInsensitive": true
-        }
-      }
-    ]
-  }
 }
 ```
 
