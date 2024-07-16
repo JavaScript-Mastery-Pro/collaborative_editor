@@ -6,7 +6,13 @@
  *
  */
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { mergeRegister } from '@lexical/utils';
+import {
+  $createHeadingNode,
+  $createQuoteNode,
+  $isHeadingNode,
+} from '@lexical/rich-text';
+import { $setBlocksType } from '@lexical/selection';
+import { mergeRegister, $findMatchingParent } from '@lexical/utils';
 import {
   $createParagraphNode,
   $isRootOrShadowRoot,
@@ -20,15 +26,7 @@ import {
   SELECTION_CHANGE_COMMAND,
   UNDO_COMMAND,
 } from 'lexical';
-import {
-  $createHeadingNode,
-  $createQuoteNode,
-  $isHeadingNode,
-} from '@lexical/rich-text';
-import { $setBlocksType } from '@lexical/selection';
-import { $findMatchingParent } from '@lexical/utils';
-import React from 'react';
-import {
+import React, {
   useCallback,
   useEffect,
   useRef,
