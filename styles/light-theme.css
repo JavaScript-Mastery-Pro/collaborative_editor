@@ -48,11 +48,6 @@ body {
   text-align: center;
 }
 
-h1 {
-  font-size: 24px;
-  color: #333;
-}
-
 .ltr {
   text-align: left;
 }
@@ -230,22 +225,22 @@ h1 {
 }
 
 .editor-heading-h1 {
-  font-size: 24px;
-  color: rgb(5, 5, 5);
-  font-weight: 400;
+  font-size: 2rem;
   margin: 0;
   margin-bottom: 12px;
   padding: 0;
 }
 
 .editor-heading-h2 {
-  font-size: 15px;
-  color: rgb(101, 103, 107);
-  font-weight: 700;
+  font-size: 1.5rem;
   margin: 0;
-  margin-top: 10px;
   padding: 0;
-  text-transform: uppercase;
+}
+
+.editor-heading-h3 {
+  font-size: 1.25rem;
+  margin: 0;
+  padding: 0;
 }
 
 .editor-quote {
@@ -451,4 +446,16 @@ i.right-align {
 
 i.justify-align {
   background-image: url(/assets/icons/justify.svg);
+}
+
+i.h1 {
+  background-image: url(/assets/icons/h1.svg);
+}
+
+i.h2 {
+  background-image: url(/assets/icons/h2.svg);
+}
+
+i.h3 {
+  background-image: url(/assets/icons/h3.svg);
 }

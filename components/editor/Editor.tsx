@@ -6,6 +6,7 @@ import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
+import { HeadingNode } from '@lexical/rich-text';
 import { useThreads } from '@liveblocks/react/suspense';
 import {
   liveblocksConfig,
@@ -39,7 +40,7 @@ export function Editor({
 
   const initialConfig = liveblocksConfig({
     namespace: 'Editor',
-    nodes: [],
+    nodes: [HeadingNode],
     onError: (error: unknown) => {
       console.error(error);
       throw error;
