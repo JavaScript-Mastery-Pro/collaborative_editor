@@ -1,7 +1,5 @@
 'use server';
 
-import console from 'console';
-
 import { nanoid } from 'nanoid';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';

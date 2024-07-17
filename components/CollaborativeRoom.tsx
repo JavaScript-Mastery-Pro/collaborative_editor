@@ -80,7 +80,7 @@ export function CollaborativeRoom({
             {/* Title text & Input field */}
             <div
               ref={containerRef}
-              className="flex w-fit items-center justify-center gap-2"
+              className="flex w-fit items-center justify-center gap-2 lg:flex-1"
             >
               {editing && !loading ? (
                 <Input
@@ -121,7 +121,7 @@ export function CollaborativeRoom({
             </div>
 
             {/* Collaborators & Actions */}
-            <div className="flex w-full flex-1 justify-end gap-2 sm:gap-3">
+            <div className="flex w-[150px] justify-end gap-2 sm:gap-3 ">
               <ActiveCollaborators />
               <ShareModal
                 roomId={roomId}
